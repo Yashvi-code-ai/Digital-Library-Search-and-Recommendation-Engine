@@ -383,19 +383,19 @@ static void greedy_menu(void) {
 static void dynamic_programming_menu(void){
  int choice;
  for(;;){
-  puts("\\n========== PHASE 5: DYNAMIC PROGRAMMING ==========");
+  puts("\n========== PHASE 5: DYNAMIC PROGRAMMING ==========");
   puts("1. 0/1 Knapsack");puts("2. Matrix Chain Multiplication");puts("3. Longest Common Subsequence");
   puts("4. Optimal BST");puts("5. Bellman-Ford");puts("6. Floyd-Warshall");puts("7. Bounded TSP");puts("0. Return");
   if(!read_int("Choose: ",&choice))continue;
   if(choice==0)return;
   long long result=0;
-  if(choice==1){int n,cap,w[80],v[80];if(!read_int("Items (1-80): ",&n)||n<1||n>80||!read_int("Capacity: ",&cap)||cap<0||cap>100000){puts("Invalid.");continue;}for(int i=0;i<n;i++)if(!read_int("Weight: ",&w[i])||!read_int("Value: ",&v[i]))return;if(dp_knapsack(w,v,n,cap,&result))printf("Best value: %lld\\n",result);else puts("Invalid items.");}
-  else if(choice==2){int n,d[31];if(!read_int("Number of matrices (1-30): ",&n)||n<1||n>30)continue;for(int i=0;i<=n;i++)if(!read_int("Dimension: ",&d[i]))return;if(dp_chain(d,n,&result))printf("Minimum scalar multiplications: %lld\\n",result);else puts("Calculation failed.");}
-  else if(choice==3){char a[256],b[256];size_t len;read_line("First string: ",a,sizeof a);read_line("Second string: ",b,sizeof b);if(dp_lcs(a,b,&len))printf("LCS length: %zu\\n",len);}
-  else if(choice==4){int n,f[80];if(!read_int("Number of ordered keys (1-80): ",&n)||n<1||n>80)continue;for(int i=0;i<n;i++)if(!read_int("Frequency: ",&f[i]))return;if(dp_obst(f,n,&result))printf("Optimal BST weighted cost: %lld\\n",result);}
-  else if(choice==5){int n,m,src,e[300];long long dist[30];if(!read_int("Vertices (1-30): ",&n)||n<1||n>30||!read_int("Edges (0-100): ",&m)||m<0||m>100||!read_int("Source (zero-based): ",&src))continue;for(int i=0;i<m;i++)for(int j=0;j<3;j++)if(!read_int("Edge from/to/weight: ",&e[3*i+j]))return;int r=dp_bellman(e,m,n,src,dist);if(r==-1)puts("Reachable negative-weight cycle detected.");else if(r){for(int i=0;i<n;i++)if(dist[i]==LLONG_MAX)printf("%d: unreachable\\n",i);else printf("%d: %lld\\n",i,dist[i]);}else puts("Invalid graph input.");}
-  else if(choice==6){int n;if(!read_int("Vertices (1-20): ",&n)||n<1||n>20)continue;long long a[400];puts("Enter matrix row-wise; use 999999999 for no edge.");for(int i=0;i<n*n;i++){int x;if(!read_int("Entry: ",&x))return;a[i]=x==999999999?LLONG_MAX:x;}for(int i=0;i<n;i++)a[i*n+i]=0;int r=dp_floyd(a,n);if(r<0)puts("Negative cycle detected.");else if(r){for(int i=0;i<n;i++){for(int j=0;j<n;j++)if(a[i*n+j]==LLONG_MAX)printf("INF ");else printf("%lld ",a[i*n+j]);putchar('\\n');}}}
-  else if(choice==7){int n,g[256];if(!read_int("Vertices (2-16): ",&n)||n<2||n>16)continue;puts("Enter matrix (0 means no edge):");for(int i=0;i<n*n;i++)if(!read_int("Weight: ",&g[i]))return;if(dp_tsp(g,n,&result))printf("Minimum tour cost: %lld\\n",result);else puts("No tour or calculation unavailable.");}
+  if(choice==1){int n,cap,w[80],v[80];if(!read_int("Items (1-80): ",&n)||n<1||n>80||!read_int("Capacity: ",&cap)||cap<0||cap>100000){puts("Invalid.");continue;}for(int i=0;i<n;i++)if(!read_int("Weight: ",&w[i])||!read_int("Value: ",&v[i]))return;if(dp_knapsack(w,v,n,cap,&result))printf("Best value: %lld\n",result);else puts("Invalid items.");}
+  else if(choice==2){int n,d[31];if(!read_int("Number of matrices (1-30): ",&n)||n<1||n>30)continue;for(int i=0;i<=n;i++)if(!read_int("Dimension: ",&d[i]))return;if(dp_chain(d,n,&result))printf("Minimum scalar multiplications: %lld\n",result);else puts("Calculation failed.");}
+  else if(choice==3){char a[256],b[256];size_t len;read_line("First string: ",a,sizeof a);read_line("Second string: ",b,sizeof b);if(dp_lcs(a,b,&len))printf("LCS length: %zu\n",len);}
+  else if(choice==4){int n,f[80];if(!read_int("Number of ordered keys (1-80): ",&n)||n<1||n>80)continue;for(int i=0;i<n;i++)if(!read_int("Frequency: ",&f[i]))return;if(dp_obst(f,n,&result))printf("Optimal BST weighted cost: %lld\n",result);}
+  else if(choice==5){int n,m,src,e[300];long long dist[30];if(!read_int("Vertices (1-30): ",&n)||n<1||n>30||!read_int("Edges (0-100): ",&m)||m<0||m>100||!read_int("Source (zero-based): ",&src))continue;for(int i=0;i<m;i++)for(int j=0;j<3;j++)if(!read_int("Edge from/to/weight: ",&e[3*i+j]))return;int r=dp_bellman(e,m,n,src,dist);if(r==-1)puts("Reachable negative-weight cycle detected.");else if(r){for(int i=0;i<n;i++)if(dist[i]==LLONG_MAX)printf("%d: unreachable\n",i);else printf("%d: %lld\n",i,dist[i]);}else puts("Invalid graph input.");}
+  else if(choice==6){int n;if(!read_int("Vertices (1-20): ",&n)||n<1||n>20)continue;long long a[400];puts("Enter matrix row-wise; use 999999999 for no edge.");for(int i=0;i<n*n;i++){int x;if(!read_int("Entry: ",&x))return;a[i]=x==999999999?LLONG_MAX:x;}for(int i=0;i<n;i++)a[i*n+i]=0;int r=dp_floyd(a,n);if(r<0)puts("Negative cycle detected.");else if(r){for(int i=0;i<n;i++){for(int j=0;j<n;j++)if(a[i*n+j]==LLONG_MAX)printf("INF ");else printf("%lld ",a[i*n+j]);putchar('\n');}}}
+  else if(choice==7){int n,g[256];if(!read_int("Vertices (2-16): ",&n)||n<2||n>16)continue;puts("Enter matrix (0 means no edge):");for(int i=0;i<n*n;i++)if(!read_int("Weight: ",&g[i]))return;if(dp_tsp(g,n,&result))printf("Minimum tour cost: %lld\n",result);else puts("No tour or calculation unavailable.");}
   else puts("Unknown option.");
  }
 }
