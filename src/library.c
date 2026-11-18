@@ -102,7 +102,7 @@ static void csv_write_field(FILE *file, const char *value) {
     fputc('"', file);
 }
 
-static int csv_read_field(const char **cursor, char *out, size_t size) {
+static int csv_read_field(char **cursor, char *out, size_t size) {
     size_t used = 0;
     const char *p = *cursor;
     int quoted = (*p == '"');
@@ -150,14 +150,14 @@ int library_load_csv(Library *library, const char *path) {
         Book b = {0};
         char *cursor = line, field[KEYWORDS_LEN + 1], *end;
         long number;
-        if (!csv_read_field((const char **)&cursor, field, sizeof field)) continue;
+        if (!csv_read_field(&cursor, field, sizeof field)) continue;
         number = strtol(field, &end, 10);
         if (*end || number <= 0 || number > 2147483647L) continue;
         b.id = (int)number;
-        csv_read_field((const char **)&cursor, b.title, sizeof b.title);
-        csv_read_field((const char **)&cursor, b.author, sizeof b.author);
-        csv_read_field((const char **)&cursor, b.category, sizeof b.category);
-        csv_read_field((const char **)&cursor, b.keywords, sizeof b.keywords);
+        csv_read_field(&cursor, b.title, sizeof b.title);
+        csv_read_field(&cursor, b.author, sizeof b.author);
+        csv_read_field(&cursor, b.category, sizeof b.category);
+        csv_read_field(&cursor, b.keywords, sizeof b.keywords);
         if (sscanf(cursor, "%d,%d", &b.citations, &b.popularity) != 2 ||
             b.citations < 0 || b.popularity < 0) continue;
         if (!library_add(library, &b)) {
