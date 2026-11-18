@@ -22,6 +22,15 @@ A beginner-friendly **C17 command-line digital library** built incrementally for
 - Binary Search checks the sorted-input requirement and automatically runs Merge Sort if needed.
 - Sorts complete Book records, preserving all book details.
 
+### Phase 3: Divide and conquer
+
+- Maximum Subarray using divide-and-conquer; reports the sum and zero-based range.
+- Fast Powering using binary exponentiation, with overflow detection.
+- Celebrity Problem using recursive candidate elimination and final verification.
+- Classical square matrix multiplication.
+- Strassen square matrix multiplication; pads non-power-of-two dimensions internally.
+- A separate Phase 3 menu and dedicated unit tests.
+
 ## Repository layout
 
 ```text
@@ -29,21 +38,25 @@ Digital-Library-Search-and-Recommendation-Engine/
 ├── include/
 │   ├── book.h
 │   ├── library.h
-│   └── algorithms.h
+│   ├── algorithms.h
+│   └── divide_conquer.h
 ├── src/
 │   ├── main.c
 │   ├── book.c
 │   ├── library.c
 │   ├── searching.c
-│   └── sorting.c
+│   ├── sorting.c
+│   └── divide_conquer.c
 ├── data/
 │   └── books.csv
 ├── tests/
 │   ├── test_library.c
-│   └── test_search_sort.c
+│   ├── test_search_sort.c
+│   └── test_divide_conquer.c
 ├── docs/
 │   ├── PHASE1_WORKFLOW.md
-│   └── PHASE2_SEARCH_SORT.md
+│   ├── PHASE2_SEARCH_SORT.md
+│   └── PHASE3_DIVIDE_CONQUER.md
 └── Makefile
 ```
 
@@ -71,20 +84,19 @@ make test
 
 The app reads and writes `data/books.csv`. Run it from the repository root so this relative path resolves correctly.
 
-## Phase 2 menu
+## Phase 3 menu
 
-Choose option **7** from the main menu:
+Choose option **8** from the main menu:
 
-1. Linear Search (exact title)
-2. Iterative Binary Search
-3. Recursive Binary Search
-4. Merge Sort
-5. Quick Sort
-6. Display current book order
+1. Maximum Subarray
+2. Fast Powering
+3. Celebrity Problem
+4. Classical Matrix Multiplication
+5. Strassen Matrix Multiplication (the app displays both results for comparison)
 0. Return to main menu
 
-See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md) and [Phase 2 searching and sorting workflow](docs/PHASE2_SEARCH_SORT.md).
+See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md), [Phase 2 searching and sorting workflow](docs/PHASE2_SEARCH_SORT.md), and [Phase 3 divide-and-conquer workflow](docs/PHASE3_DIVIDE_CONQUER.md).
 
 ## Planned next phases
 
-Divide-and-conquer, greedy methods, dynamic programming, backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded tests, and benchmarking will be added in separate modules.
+Greedy methods, dynamic programming, backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
