@@ -2,6 +2,7 @@
 #include "library.h"
 #include "algorithms.h"
 #include "divide_conquer.h"
+#include "greedy.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -217,6 +218,164 @@ static void divide_conquer_menu(void) {
     }
 }
 
+
+static int read_activity_list(Activity *activities, size_t count) {
+    for (size_t i=0;i<count;i++) {
+        char prompt[64];
+        snprintf(prompt,sizeof prompt,"Activity %zu start time: ",i+1);
+        if(!read_int(prompt,&activities[i].start)) return 0;
+        snprintf(prompt,sizeof prompt,"Activity %zu finish time: ",i+1);
+        if(!read_int(prompt,&activities[i].finish) ||
+           activities[i].finish<activities[i].start) return 0;
+    }
+    return 1;
+}
+
+static void activity_selection_menu(void) {
+    int n;
+    if(!read_int("Number of activities (1-100): ",&n)||n<1||n>100){puts("Invalid count.");return;}
+    Activity a[100];size_t selected[100];
+    if(!read_activity_list(a,(size_t)n)){puts("Invalid activity interval.");return;}
+    size_t used=greedy_activity_selection(a,(size_t)n,selected);
+    printf("Selected %zu compatible activities (original input numbers):\n",used);
+    for(size_t i=0;i<used;i++)printf("Activity %zu: [%d, %d]\n",selected[i]+1,a[selected[i]].start,a[selected[i]].finish);
+}
+
+static void interval_partition_menu(void) {
+    int n;
+    if(!read_int("Number of activities (1-100): ",&n)||n<1||n>100){puts("Invalid count.");return;}
+    Activity a[100];ScheduledActivity schedule[100];
+    if(!read_activity_list(a,(size_t)n)){puts("Invalid activity interval.");return;}
+    size_t rooms=greedy_interval_partition(a,(size_t)n,schedule);
+    if(!rooms){puts("Could not assign rooms.");return;}
+    printf("Minimum rooms required: %zu\n",rooms);
+    for(int room=0;room<(int)rooms;room++){
+        printf("Room %d:",room+1);
+        for(int i=0;i<n;i++)if(schedule[i].room==room)
+            printf(" Activity %d [%d,%d]",schedule[i].original_index+1,schedule[i].start,schedule[i].finish);
+        putchar('\n');
+    }
+}
+
+static void huffman_menu(void) {
+    int n;
+    if(!read_int("Number of distinct symbols (1-50): ",&n)||n<1||n>50){puts("Invalid count.");return;}
+    HuffmanSymbol symbols[50];char codes[50][256];
+    for(int i=0;i<n;i++){
+        char prompt[64];int ch;int freq;
+        snprintf(prompt,sizeof prompt,"Symbol %d (enter ASCII code 33-126): ",i+1);
+        if(!read_int(prompt,&ch)||ch<33||ch>126){puts("Invalid symbol.");return;}
+        for(int j=0;j<i;j++)if(symbols[j].symbol==(char)ch){puts("Symbols must be unique.");return;}
+        snprintf(prompt,sizeof prompt,"Frequency for %c: ",ch);
+        if(!read_int(prompt,&freq)||freq<=0){puts("Frequency must be positive.");return;}
+        symbols[i]=(HuffmanSymbol){(char)ch,(unsigned long long)freq};
+    }
+    if(!greedy_huffman(symbols,(size_t)n,codes)){puts("Huffman coding failed.");return;}
+    puts("Huffman codes:");
+    for(int i=0;i<n;i++)printf("%c (frequency %llu): %s\n",symbols[i].symbol,symbols[i].frequency,codes[i]);
+}
+
+static int read_weighted_matrix(int *graph,int n) {
+    puts("Enter adjacency matrix (0 = no edge; use positive weights):");
+    for(int i=0;i<n;i++)for(int j=0;j<n;j++){
+        char prompt[48];int value;
+        snprintf(prompt,sizeof prompt,"weight[%d][%d]: ",i,j);
+        if(!read_int(prompt,&value)||value<0)return 0;
+        graph[i*n+j]=value;
+    }
+    return 1;
+}
+
+static void dijkstra_menu(void) {
+    int n,source;
+    if(!read_int("Number of vertices (1-20): ",&n)||n<1||n>20){puts("Invalid count.");return;}
+    int graph[400],parent[20];long long dist[20];
+    if(!read_weighted_matrix(graph,n)){puts("Invalid matrix. Negative weights are not allowed.");return;}
+    if(!read_int("Source vertex (zero-based): ",&source)||source<0||source>=n){puts("Invalid source.");return;}
+    if(!greedy_dijkstra(graph,(size_t)n,(size_t)source,dist,parent)){puts("Dijkstra failed.");return;}
+    for(int i=0;i<n;i++){
+        if(dist[i]==LLONG_MAX)printf("Vertex %d: unreachable\n",i);
+        else printf("Vertex %d: distance %lld, predecessor %d\n",i,dist[i],parent[i]);
+    }
+}
+
+static void prim_menu(void) {
+    int n;
+    if(!read_int("Number of vertices (1-20): ",&n)||n<1||n>20){puts("Invalid count.");return;}
+    int graph[400];WeightedEdge tree[19];long long total;
+    if(!read_weighted_matrix(graph,n)){puts("Invalid matrix.");return;}
+    if(!greedy_prim(graph,(size_t)n,tree,&total)){puts("Prim failed. Check that the graph is connected and undirected.");return;}
+    puts("Minimum spanning tree edges:");
+    for(int i=0;i<n-1;i++)printf("%d -- %d (weight %d)\n",tree[i].u,tree[i].v,tree[i].weight);
+    printf("Total MST weight: %lld\n",total);
+}
+
+static void kruskal_menu(void) {
+    int n,m;
+    if(!read_int("Number of vertices (1-20): ",&n)||n<1||n>20||
+       !read_int("Number of edges (0-100): ",&m)||m<0||m>100){puts("Invalid graph size.");return;}
+    WeightedEdge edges[100],tree[19];size_t used;long long total;
+    for(int i=0;i<m;i++){
+        int u,v,w;char prompt[48];
+        snprintf(prompt,sizeof prompt,"Edge %d first vertex: ",i+1);
+        if(!read_int(prompt,&u)){puts("Invalid edge.");return;}
+        snprintf(prompt,sizeof prompt,"Edge %d second vertex: ",i+1);
+        if(!read_int(prompt,&v)){puts("Invalid edge.");return;}
+        snprintf(prompt,sizeof prompt,"Edge %d weight: ",i+1);
+        if(!read_int(prompt,&w)||u<0||v<0||u>=n||v>=n||u==v||w<0){puts("Invalid edge.");return;}
+        edges[i]=(WeightedEdge){u,v,w};
+    }
+    if(!greedy_kruskal(edges,(size_t)m,(size_t)n,tree,&used,&total)){puts("Kruskal failed: graph may be disconnected.");return;}
+    puts("Minimum spanning tree edges:");
+    for(size_t i=0;i<used;i++)printf("%d -- %d (weight %d)\n",tree[i].u,tree[i].v,tree[i].weight);
+    printf("Total MST weight: %lld\n",total);
+}
+
+static void fractional_knapsack_menu(void) {
+    int n,capacity;
+    if(!read_int("Number of items (1-100): ",&n)||n<1||n>100||
+       !read_int("Knapsack capacity: ",&capacity)||capacity<0){puts("Invalid input.");return;}
+    KnapsackItem items[100];double fractions[100],value;
+    for(int i=0;i<n;i++){
+        int weight,item_value;char prompt[48];
+        snprintf(prompt,sizeof prompt,"Item %d weight: ",i+1);
+        if(!read_int(prompt,&weight)||weight<=0){puts("Weight must be positive.");return;}
+        snprintf(prompt,sizeof prompt,"Item %d value: ",i+1);
+        if(!read_int(prompt,&item_value)||item_value<0){puts("Value cannot be negative.");return;}
+        items[i]=(KnapsackItem){weight,(double)item_value};
+    }
+    if(!greedy_fractional_knapsack(items,(size_t)n,capacity,fractions,&value)){puts("Knapsack calculation failed.");return;}
+    for(int i=0;i<n;i++)printf("Item %d: take %.2f%%\n",i+1,fractions[i]*100.0);
+    printf("Maximum fractional value: %.2f\n",value);
+}
+
+static void greedy_menu(void) {
+    int choice;
+    for(;;){
+        puts("\n========== PHASE 4: GREEDY ALGORITHMS ==========");
+        puts("1. Activity Selection");
+        puts("2. Interval Partitioning");
+        puts("3. Huffman Coding");
+        puts("4. Dijkstra Shortest Paths");
+        puts("5. Prim Minimum Spanning Tree");
+        puts("6. Kruskal Minimum Spanning Tree");
+        puts("7. Fractional Knapsack");
+        puts("0. Return to main menu");
+        if(!read_int("Choose an option: ",&choice)){puts("Enter a valid number.");continue;}
+        switch(choice){
+            case 0:return;
+            case 1:activity_selection_menu();break;
+            case 2:interval_partition_menu();break;
+            case 3:huffman_menu();break;
+            case 4:dijkstra_menu();break;
+            case 5:prim_menu();break;
+            case 6:kruskal_menu();break;
+            case 7:fractional_knapsack_menu();break;
+            default:puts("Unknown option. Try again.");
+        }
+    }
+}
+
 int main(void) {
     Library library;
     int choice;
@@ -225,7 +384,7 @@ int main(void) {
         puts("Note: starting with an empty library (CSV could not be loaded).");
 
     for (;;) {
-        puts("\n========== DIGITAL LIBRARY: PHASES 1, 2 AND 3 ==========");
+        puts("\n========== DIGITAL LIBRARY: PHASES 1, 2, 3 AND 4 ==========");
         puts("1. Add a book");
         puts("2. List all books");
         puts("3. Search books by title (contains text)");
@@ -234,6 +393,7 @@ int main(void) {
         puts("6. Save library");
         puts("7. Phase 2: Searching and Sorting Algorithms");
         puts("8. Phase 3: Divide-and-Conquer Algorithms");
+        puts("9. Phase 4: Greedy Algorithms");
         puts("0. Save and exit");
         if (!read_int("Choose an option: ", &choice)) {
             puts("Please enter a valid number."); continue;
@@ -257,6 +417,7 @@ int main(void) {
             case 6: puts(library_save_csv(&library, DATA_FILE) ? "Library saved." : "Save failed."); break;
             case 7: search_sort_menu(&library); break;
             case 8: divide_conquer_menu(); break;
+            case 9: greedy_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
