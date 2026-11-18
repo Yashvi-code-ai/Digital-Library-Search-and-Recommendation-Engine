@@ -1,0 +1,6 @@
+digital_library
+digital_library.exe
+*.o
+*.out
+.vscode/
+.idea/
