@@ -203,8 +203,7 @@ static void divide_conquer_menu(void) {
         puts("1. Maximum Subarray");
         puts("2. Fast Powering");
         puts("3. Celebrity Problem");
-        puts("4. Classical Matrix Multiplication");
-        puts("5. Strassen Matrix Multiplication (compared with classical)");
+        puts("4. Compare Classical and Strassen Matrix Multiplication");
         puts("0. Return to main menu");
         if (!read_int("Choose an option: ",&choice)) { puts("Enter a valid number."); continue; }
         switch (choice) {
@@ -212,8 +211,7 @@ static void divide_conquer_menu(void) {
             case 1: maximum_subarray_menu(); break;
             case 2: fast_power_menu(); break;
             case 3: celebrity_menu(); break;
-            case 4:
-            case 5: matrix_menu(); break;
+            case 4: matrix_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
