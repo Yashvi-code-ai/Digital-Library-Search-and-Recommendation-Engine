@@ -228,9 +228,10 @@ static void divide_conquer_menu(void) {
 static int read_activity_list(Activity *activities, size_t count) {
     for (size_t i=0;i<count;i++) {
         char prompt[64];
-        snprintf(prompt,sizeof prompt,"Activity %zu start time: ",i+1);
+        snprintf(prompt, sizeof prompt, "Activity %u start time: ", (unsigned)(i + 1));
+
         if(!read_int(prompt,&activities[i].start)) return 0;
-        snprintf(prompt,sizeof prompt,"Activity %zu finish time: ",i+1);
+        snprintf(prompt, sizeof prompt, "Activity %u finish time: ", (unsigned)(i + 1));
         if(!read_int(prompt,&activities[i].finish) ||
            activities[i].finish<activities[i].start) return 0;
     }
@@ -402,7 +403,7 @@ static void dynamic_programming_menu(void){
   else puts("Unknown option.");
  }
 }
-\n
+
 static void backtracking_menu(void) {
  int choice;
  for (;;) {
@@ -417,7 +418,7 @@ static void backtracking_menu(void) {
   else puts("Unknown option.");
  }
 }
-\n
+
 
 static void flow_matching_menu(void) {
  int choice;
