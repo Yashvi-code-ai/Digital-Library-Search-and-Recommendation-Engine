@@ -403,18 +403,19 @@ static void dynamic_programming_menu(void){
 static void backtracking_menu(void) {
  int choice;
  for (;;) {
-  puts("\\n========== PHASE 6: BACKTRACKING AND BRANCH-AND-BOUND ==========");
+  puts("\n========== PHASE 6: BACKTRACKING AND BRANCH-AND-BOUND ==========");
   puts("1. N-Queens"); puts("2. Subset Sum"); puts("3. 0/1 Knapsack Backtracking");
   puts("4. Knapsack Branch-and-Bound"); puts("0. Return");
   if (!read_int("Choose: ", &choice)) continue;
   if (choice == 0) return;
-  if (choice == 1) { int n; if (!read_int("Board size (1-14): ", &n)) continue; long long x=bt_nqueens_count(n); if(x<0) puts("Invalid size or allocation failure."); else printf("Number of solutions: %lld\\n",x); }
+  if (choice == 1) { int n; if (!read_int("Board size (1-14): ", &n)) continue; long long x=bt_nqueens_count(n); if(x<0) puts("Invalid size or allocation failure."); else printf("Number of solutions: %lld\n",x); }
   else if (choice == 2) { int n,target,a[40]; if(!read_int("Number of values (1-40): ",&n)||n<1||n>40||!read_int("Target sum: ",&target)) continue; for(int i=0;i<n;i++) if(!read_int("Value: ",&a[i])) return; int r=bt_subset_sum(a,n,target); puts(r?"A subset with the target sum exists.":"No subset found (or invalid input)."); }
-  else if (choice == 3 || choice == 4) { int n,cap,w[40],v[40]; long long best; if(!read_int("Items (1-20): ",&n)||n<1||n>20||!read_int("Capacity: ",&cap)||cap<0)continue; for(int i=0;i<n;i++){if(!read_int("Weight: ",&w[i])||!read_int("Value: ",&v[i]))return;} if(choice==3){if(bt_knapsack(w,v,n,cap,&best))printf("Maximum value: %lld\\n",best);else puts("Invalid input.");} else {int strategy;puts("0. LIFO (depth-first)  1. FIFO (breadth-first)  2. Least-cost/best-bound");if(!read_int("Strategy: ",&strategy))continue;if(bt_knapsack_bnb(w,v,n,cap,strategy,&best))printf("Maximum value: %lld\\n",best);else puts("Invalid input or unsupported size.");} }
+  else if (choice == 3 || choice == 4) { int n,cap,w[40],v[40]; long long best; if(!read_int("Items (1-20): ",&n)||n<1||n>20||!read_int("Capacity: ",&cap)||cap<0)continue; for(int i=0;i<n;i++){if(!read_int("Weight: ",&w[i])||!read_int("Value: ",&v[i]))return;} if(choice==3){if(bt_knapsack(w,v,n,cap,&best))printf("Maximum value: %lld\n",best);else puts("Invalid input.");} else {int strategy;puts("0. LIFO (depth-first)  1. FIFO (breadth-first)  2. Least-cost/best-bound");if(!read_int("Strategy: ",&strategy))continue;if(bt_knapsack_bnb(w,v,n,cap,strategy,&best))printf("Maximum value: %lld\n",best);else puts("Invalid input or unsupported size.");} }
   else puts("Unknown option.");
  }
 }
-\nint main(void) {
+\n
+int main(void) {
     Library library;
     int choice;
     library_init(&library);
