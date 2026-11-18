@@ -127,3 +127,10 @@ Choose option **11** in the main menu for N-Queens, Subset Sum, 0/1 Knapsack bac
 ## Phase 7: Flow and Matching Algorithms
 
 Choose option **12** for Ford-Fulkerson maximum flow (BFS augmenting paths / Edmonds-Karp) and maximum bipartite matching. See [Phase 7 documentation](docs/PHASE7_FLOW_MATCHING.md).
+
+
+## Phase 8: String Matching and CRT
+
+Choose option **13** from the main menu. This phase provides Naive, Rabin-Karp, finite-automaton, and KMP string matching, plus the Chinese Remainder Theorem for systems with pairwise-coprime moduli. See [Phase 8 workflow and complexity](docs/PHASE8_STRING_MATCHING_CRT.md).
+
+The common `make test` command now also runs the Phase 8 test suite.
