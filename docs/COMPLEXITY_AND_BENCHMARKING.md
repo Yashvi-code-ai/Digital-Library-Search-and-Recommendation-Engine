@@ -47,7 +47,7 @@ CSV columns: algorithm, text length, pattern length, character comparisons, CPU 
 - `include/analysis.h`: reduction and benchmark interfaces.
 - `src/analysis.c`: reduction mapping and benchmark runner.
 - `tests/test_analysis.c`: reduction tests.
-- `docs/PHASE9_COMPLEXITY_BENCHMARKS.md`: concepts, proof, and benchmark instructions.
+- `docs/COMPLEXITY_AND_BENCHMARKING.md`: concepts, proof, and benchmark instructions.
 
 ## 5. Run
 
