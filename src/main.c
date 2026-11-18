@@ -503,7 +503,7 @@ int main(void) {
         puts("Note: starting with an empty library (CSV could not be loaded).");
 
     for (;;) {
-        puts("\n========== DIGITAL LIBRARY: PHASES 1, 2, 3, 4 AND 5 ==========");
+        puts("\n========== DIGITAL LIBRARY: PHASES 1-8 ==========");
         puts("1. Add a book");
         puts("2. List all books");
         puts("3. Search books by title (contains text)");
