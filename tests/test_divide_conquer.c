@@ -37,6 +37,14 @@ static void test_celebrity(void) {
     };
     assert(celebrity_divide_conquer(knows, 3) == 2);
     assert(celebrity_divide_conquer(nobody, 3) == -1);
+    const int last_is_celebrity[] = {
+        0,1,1,
+        0,0,1,
+        0,0,0
+    };
+    assert(celebrity_divide_conquer(last_is_celebrity, 3) == 2);
+    const int single_person[] = {0};
+    assert(celebrity_divide_conquer(single_person, 1) == 0);
 }
 
 static void test_matrices(void) {
