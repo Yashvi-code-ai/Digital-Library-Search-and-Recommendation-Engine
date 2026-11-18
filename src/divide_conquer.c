@@ -110,7 +110,14 @@ static int celebrity_candidate(const int *m, size_t n, size_t people) {
 int celebrity_divide_conquer(const int *knows, size_t count) {
     if (!knows || count == 0 || count > (size_t)INT_MAX) return -1;
     int candidate = celebrity_candidate(knows, count, count);
-    if (candidate < 0) return -1;
+    if (candidate < 0) {
+        size_t last = count - 1;
+        for (size_t i = 0; i < last; ++i) {
+            if (knows[i * count + last] == 0 || knows[last * count + i] != 0)
+                return -1;
+        }
+        return (int)last;
+    }
 
     for (size_t i = 0; i < count; ++i) {
         if (i == (size_t)candidate) continue;
@@ -162,6 +169,7 @@ static int strassen_recursive(const long long *a, const long long *b,
     size_t h = n / 2;
     if (h > SIZE_MAX / h || h * h > SIZE_MAX / sizeof(long long)) return 0;
     size_t cells = h * h;
+    if (cells > SIZE_MAX / (17 * sizeof(long long))) return 0;
     long long *mem = (long long *)malloc(17 * cells * sizeof(long long));
     if (!mem) return 0;
 
