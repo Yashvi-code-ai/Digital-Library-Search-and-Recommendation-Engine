@@ -1,6 +1,7 @@
 #include "divide_conquer.h"
 
 #include <assert.h>
+#include <limits.h>
 #include <stdio.h>
 
 static void test_maximum_subarray(void) {
