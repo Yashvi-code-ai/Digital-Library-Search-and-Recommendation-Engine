@@ -102,6 +102,12 @@ static int celebrity_candidate(const int *m, size_t n, size_t people) {
     if (people == 1) return 0;
     int candidate = celebrity_candidate(m, n, people - 1);
     size_t last = people - 1;
+    if (candidate < 0) {
+        for (size_t i = 0; i < last; ++i) {
+            if (m[i * n + last] == 0 || m[last * n + i] != 0) return -1;
+        }
+        return (int)last;
+    }
     if (m[(size_t)candidate * n + last]) return (int)last;
     if (m[last * n + (size_t)candidate]) return candidate;
     return -1;
