@@ -1,0 +1,4 @@
+id,title,author,category,keywords,citations,popularity
+1,"Introduction to Algorithms","Thomas H. Cormen","Computer Science","algorithms data structures",120,95
+2,"The C Programming Language","Brian W. Kernighan","Programming","c programming fundamentals",80,88
+3,"Clean Code","Robert C. Martin","Software Engineering","software design maintainability",65,91
