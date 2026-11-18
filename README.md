@@ -117,3 +117,8 @@ See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md), [Phase 2 searching and sorting 
 ## Planned next phases
 
 Backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
+
+
+## Phase 6: Backtracking and Branch-and-Bound
+
+Choose option **11** in the main menu for N-Queens, Subset Sum, 0/1 Knapsack backtracking, and Knapsack Branch-and-Bound using LIFO, FIFO, or least-cost/best-bound node selection. See [Phase 6 documentation](docs/PHASE6_BACKTRACKING.md).
