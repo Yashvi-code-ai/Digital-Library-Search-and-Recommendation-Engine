@@ -138,8 +138,8 @@ static void build_codes(const HuffNode *nodes,int index,char *path,size_t depth,
                         char codes[][256]){
     const HuffNode *node=&nodes[index];
     if(node->symbol>=0){
-        if(depth==0){codes[node->symbol][0]='0';codes[node->symbol][1]='\\0';}
-        else{memcpy(codes[node->symbol],path,depth);codes[node->symbol][depth]='\\0';}
+        if(depth==0){codes[node->symbol][0]='0';codes[node->symbol][1]='\0';}
+        else{memcpy(codes[node->symbol],path,depth);codes[node->symbol][depth]='\0';}
         return;
     }
     if(depth>=254)return;
@@ -151,7 +151,7 @@ int greedy_huffman(const HuffmanSymbol *symbols,size_t n,char codes[][256]){
     HuffNode *nodes=(HuffNode *)calloc(2*n-1,sizeof(*nodes));
     unsigned char *active=(unsigned char *)calloc(2*n-1,1);
     if(!nodes||!active){free(nodes);free(active);return 0;}
-    for(size_t i=0;i<n;i++){nodes[i]=(HuffNode){symbols[i].frequency,-1,-1,(int)i};active[i]=1;codes[i][0]='\\0';}
+    for(size_t i=0;i<n;i++){nodes[i]=(HuffNode){symbols[i].frequency,-1,-1,(int)i};active[i]=1;codes[i][0]='\0';}
     size_t total=2*n-1;
     for(size_t next=n;next<total;next++){
         int a=-1,b=-1;
