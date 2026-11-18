@@ -122,3 +122,8 @@ Backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, 
 ## Phase 6: Backtracking and Branch-and-Bound
 
 Choose option **11** in the main menu for N-Queens, Subset Sum, 0/1 Knapsack backtracking, and Knapsack Branch-and-Bound using LIFO, FIFO, or least-cost/best-bound node selection. See [Phase 6 documentation](docs/PHASE6_BACKTRACKING.md).
+
+
+## Phase 7: Flow and Matching Algorithms
+
+Choose option **12** for Ford-Fulkerson maximum flow (BFS augmenting paths / Edmonds-Karp) and maximum bipartite matching. See [Phase 7 documentation](docs/PHASE7_FLOW_MATCHING.md).
