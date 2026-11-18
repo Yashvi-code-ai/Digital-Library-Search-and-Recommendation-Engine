@@ -74,7 +74,7 @@ static void ensure_title_order(Library *library) {
 static void search_sort_menu(Library *library) {
     int choice;
     for (;;) {
-        puts("\n========== PHASE 2: SEARCHING AND SORTING ==========");
+        puts("\n========== SEARCHING AND SORTING ==========");
         puts("1. Linear Search (exact title)");
         puts("2. Iterative Binary Search");
         puts("3. Recursive Binary Search");
@@ -206,7 +206,7 @@ static void matrix_menu(void) {
 static void divide_conquer_menu(void) {
     int choice;
     for (;;) {
-        puts("\n========== PHASE 3: DIVIDE AND CONQUER ==========");
+        puts("\n========== DIVIDE AND CONQUER ==========");
         puts("1. Maximum Subarray");
         puts("2. Fast Powering");
         puts("3. Celebrity Problem");
@@ -358,7 +358,7 @@ static void fractional_knapsack_menu(void) {
 static void greedy_menu(void) {
     int choice;
     for(;;){
-        puts("\n========== PHASE 4: GREEDY ALGORITHMS ==========");
+        puts("\n========== GREEDY ALGORITHMS ==========");
         puts("1. Activity Selection");
         puts("2. Interval Partitioning");
         puts("3. Huffman Coding");
@@ -386,7 +386,7 @@ static void greedy_menu(void) {
 static void dynamic_programming_menu(void){
  int choice;
  for(;;){
-  puts("\n========== PHASE 5: DYNAMIC PROGRAMMING ==========");
+  puts("\n========== DYNAMIC PROGRAMMING ==========");
   puts("1. 0/1 Knapsack");puts("2. Matrix Chain Multiplication");puts("3. Longest Common Subsequence");
   puts("4. Optimal BST");puts("5. Bellman-Ford");puts("6. Floyd-Warshall");puts("7. Bounded TSP");puts("0. Return");
   if(!read_int("Choose: ",&choice))continue;
@@ -406,7 +406,7 @@ static void dynamic_programming_menu(void){
 static void backtracking_menu(void) {
  int choice;
  for (;;) {
-  puts("\n========== PHASE 6: BACKTRACKING AND BRANCH-AND-BOUND ==========");
+  puts("\n========== BACKTRACKING AND BRANCH-AND-BOUND ==========");
   puts("1. N-Queens"); puts("2. Subset Sum"); puts("3. 0/1 Knapsack Backtracking");
   puts("4. Knapsack Branch-and-Bound"); puts("0. Return");
   if (!read_int("Choose: ", &choice)) continue;
@@ -422,7 +422,7 @@ static void backtracking_menu(void) {
 static void flow_matching_menu(void) {
  int choice;
  for (;;) {
-  puts("\n========== PHASE 7: FLOW AND MATCHING ==========");
+  puts("\n========== FLOW AND MATCHING ==========");
   puts("1. Ford-Fulkerson Maximum Flow");
   puts("2. Maximum Bipartite Matching");
   puts("0. Return");
@@ -449,10 +449,10 @@ static void flow_matching_menu(void) {
  }
 }
 
-static void phase8_menu(void) {
+static void string_matching_menu(void) {
     int choice;
     for (;;) {
-        puts("\n========== PHASE 8: STRING MATCHING AND CRT ==========");
+        puts("\n========== STRING MATCHING AND CRT ==========");
         puts("1. Naive String Matching");
         puts("2. Rabin-Karp String Matching");
         puts("3. Finite Automaton String Matching");
@@ -496,10 +496,10 @@ static void phase8_menu(void) {
     }
 }
 
-static void phase9_menu(void) {
+static void complexity_menu(void) {
     int choice;
     for (;;) {
-        puts("\n========== PHASE 9: COMPLEXITY AND BENCHMARKING ==========");
+        puts("\n========== COMPLEXITY AND BENCHMARKING ==========");
         puts("1. Complexity Classes (P, NP, NP-Complete, NP-Hard)");
         puts("2. Independent Set to Vertex Cover Reduction");
         puts("3. Run String Matching Benchmark");
@@ -532,7 +532,7 @@ static void phase9_menu(void) {
                 puts("Therefore, G has an independent set of size >= k iff it has a vertex cover of size <= |V|-k.");
             } else puts("Could not transform this input.");
         } else if (choice == 3) {
-            if (!analysis_run_benchmark("data/phase9_benchmark.csv"))
+            if (!analysis_run_benchmark("data/string_matching_benchmark.csv"))
                 puts("Benchmark failed. Check that the data folder is writable.");
         } else puts("Unknown option. Try again.");
     }
@@ -546,21 +546,21 @@ int main(void) {
         puts("Note: starting with an empty library (CSV could not be loaded).");
 
     for (;;) {
-        puts("\n========== DIGITAL LIBRARY: PHASES 1-9 ==========");
+        puts("\n========== DIGITAL LIBRARY SEARCH AND ALGORITHM TOOLKIT ==========");
         puts("1. Add a book");
         puts("2. List all books");
         puts("3. Search books by title (contains text)");
         puts("4. Update a book");
         puts("5. Delete a book");
         puts("6. Save library");
-        puts("7. Phase 2: Searching and Sorting Algorithms");
-        puts("8. Phase 3: Divide-and-Conquer Algorithms");
-        puts("9. Phase 4: Greedy Algorithms");
-        puts("10. Phase 5: Dynamic Programming");
-        puts("11. Phase 6: Backtracking and Branch-and-Bound");
-        puts("12. Phase 7: Flow and Matching Algorithms");
-        puts("13. Phase 8: String Matching and CRT");
-        puts("14. Phase 9: Complexity and Benchmarking");
+        puts("7. Searching and Sorting Algorithms");
+        puts("8. Divide-and-Conquer Algorithms");
+        puts("9. Greedy Algorithms");
+        puts("10. Dynamic Programming");
+        puts("11. Backtracking and Branch-and-Bound");
+        puts("12. Flow and Matching Algorithms");
+        puts("13. String Matching and CRT");
+        puts("14. Complexity and Benchmarking");
         puts("0. Save and exit");
         if (!read_int("Choose an option: ", &choice)) {
             puts("Please enter a valid number."); continue;
@@ -588,8 +588,8 @@ int main(void) {
             case 10: dynamic_programming_menu(); break;
             case 11: backtracking_menu(); break;
             case 12: flow_matching_menu(); break;
-            case 13: phase8_menu(); break;
-            case 14: phase9_menu(); break;
+            case 13: string_matching_menu(); break;
+            case 14: complexity_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
