@@ -1,141 +1,113 @@
 # Digital Library Search and Recommendation Engine
 
-A beginner-friendly **C17 command-line digital library** built incrementally for a Design and Analysis of Algorithms (DAA) project.
+A beginner-friendly **C17 command-line digital library and algorithm toolkit** developed for a Design and Analysis of Algorithms (DAA) project.
 
-## Completed phases
+## Features
 
-### Phase 1: Library foundation
-
+### Library management
 - Book records with ID, title, author, category, keywords, citations, and popularity.
 - Add, list, search, update, and delete operations.
 - Dynamically growing array storage.
-- Case-insensitive contains-text title search.
+- Case-insensitive title search.
 - CSV loading at startup and saving on demand/exit.
 
-### Phase 2: Searching and sorting
+### Searching and sorting
+- Linear search, iterative binary search, and recursive binary search.
+- Merge sort and quick sort.
+- Binary search checks whether titles are sorted and runs merge sort when needed.
 
-- Linear Search (exact, case-insensitive title).
-- Iterative Binary Search.
-- Recursive Binary Search.
-- Merge Sort.
-- Quick Sort.
-- Binary Search checks the sorted-input requirement and automatically runs Merge Sort if needed.
-- Sorts complete Book records, preserving all book details.
+### Divide-and-conquer algorithms
+- Maximum Subarray, fast powering, and Celebrity Problem.
+- Classical and Strassen matrix multiplication.
 
-### Phase 3: Divide and conquer
+### Greedy algorithms
+- Activity Selection and Interval Partitioning.
+- Huffman Coding.
+- Dijkstra shortest paths, Prim and Kruskal minimum spanning trees.
+- Fractional Knapsack.
 
-- Maximum Subarray using divide-and-conquer; reports the sum and zero-based range.
-- Fast Powering using binary exponentiation, with overflow detection.
-- Celebrity Problem using recursive candidate elimination and final verification.
-- Classical square matrix multiplication.
-- Strassen square matrix multiplication; pads non-power-of-two dimensions internally.
-- A separate Phase 3 menu and dedicated unit tests.
+### Dynamic programming
+- 0/1 Knapsack, Matrix Chain Multiplication, LCS, and Optimal BST.
+- Bellman-Ford and Floyd-Warshall shortest paths.
+- Bounded Traveling Salesperson Problem using Held-Karp DP.
 
-### Phase 4: Greedy algorithms
+### Backtracking and branch-and-bound
+- N-Queens, Subset Sum, and 0/1 Knapsack backtracking.
+- Knapsack branch-and-bound with LIFO, FIFO, and least-cost/best-bound strategies.
 
-- Activity Selection and Interval Partitioning for scheduling.
-- Huffman Coding for prefix-free compression codes.
-- Dijkstra shortest paths for non-negative weighted graphs.
-- Prim and Kruskal minimum spanning trees.
-- Fractional Knapsack using value-to-weight ratios.
-- Separate Phase 4 menu, documentation, and unit tests.
+### Flow and matching
+- Ford-Fulkerson maximum flow using BFS augmenting paths (Edmonds-Karp).
+- Maximum bipartite matching.
 
-### Phase 5: Dynamic Programming\n\n- 0/1 Knapsack, Matrix Chain Multiplication, LCS, and Optimal BST.\n- Bellman-Ford and Floyd-Warshall shortest-path algorithms.\n- Exact bounded Traveling Salesperson Problem using Held-Karp DP.\n- Dedicated CLI menu, tests, and documentation.\n\n## Repository layout
+### String matching and number theory
+- Naive, Rabin-Karp, finite-automaton, and KMP string matching.
+- Chinese Remainder Theorem for pairwise-coprime moduli.
+
+### Complexity theory and benchmarking
+- Explanations of P, NP, NP-complete, and NP-hard.
+- Independent Set to Vertex Cover polynomial-time reduction.
+- Naive versus KMP string-matching benchmark with comparison counts, CPU time, and CSV output.
+
+## Repository layout
 
 ```text
-Digital-Library-Search-and-Recommendation-Engine/
-├── include/
-│   ├── book.h
-│   ├── library.h
-│   ├── algorithms.h
-│   ├── divide_conquer.h
-│   ├── greedy.h\n│   └── dp.h
-├── src/
-│   ├── main.c
-│   ├── book.c
-│   ├── library.c
-│   ├── searching.c
-│   ├── sorting.c
-│   ├── divide_conquer.c
-│   ├── greedy.c\n│   └── dp.c
-├── data/
-│   └── books.csv
-├── tests/
-│   ├── test_library.c
-│   ├── test_search_sort.c
-│   ├── test_divide_conquer.c
-│   ├── test_greedy.c\n│   └── test_dp.c
-├── docs/
-│   ├── PHASE1_WORKFLOW.md
-│   ├── PHASE2_SEARCH_SORT.md
-│   ├── PHASE3_DIVIDE_CONQUER.md
-│   ├── PHASE4_GREEDY.md\n│   └── PHASE5_DP.md
-└── Makefile
+include/   Header files and public function declarations
+src/       C implementations and command-line interface
+data/      Sample book data and benchmark output
+tests/     Unit test programs
+docs/      Feature and algorithm documentation
+Makefile   Build, test, run, and clean commands
 ```
 
 ## Build and run
 
-From the repository root:
+Run these commands from the repository root:
 
 ```bash
 make
-./digital_library
+make run
 ```
 
-On Windows with MinGW:
+On Windows, if GNU Make is unavailable, compile directly with GCC:
 
-```bash
-mingw32-make
-digital_library.exe
+```powershell
+gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c src/searching.c src/sorting.c src/divide_conquer.c src/greedy.c src/dp.c src/backtracking.c src/flow_matching.c src/string_number_theory.c src/analysis.c -o digital_library.exe
+.\digital_library.exe
 ```
 
-Run all available tests:
+Run all unit tests:
 
 ```bash
 make test
 ```
 
-The app reads and writes `data/books.csv`. Run it from the repository root so this relative path resolves correctly.
+Remove generated executables:
 
-## Phase 5 menu\n\nChoose option **10** to access the Dynamic Programming algorithms. Read [Phase 5 documentation](docs/PHASE5_DP.md).\n\n## Phase 4 menu
+```bash
+make clean
+```
 
-Choose option **9** from the main menu to access Activity Selection, Interval Partitioning, Huffman Coding, Dijkstra, Prim, Kruskal, and Fractional Knapsack. See [Phase 4 greedy workflow](docs/PHASE4_GREEDY.md).
+The application reads and writes `data/books.csv`. Run it from the repository root so this relative path resolves correctly.
 
-## Phase 3 menu
+## Main menu
 
-Choose option **8** from the main menu:
+- Option 7: Searching and Sorting
+- Option 8: Divide and Conquer
+- Option 9: Greedy Algorithms
+- Option 10: Dynamic Programming
+- Option 11: Backtracking and Branch-and-Bound
+- Option 12: Flow and Matching
+- Option 13: String Matching and CRT
+- Option 14: Complexity Theory and Benchmarking
 
-1. Maximum Subarray
-2. Fast Powering
-3. Celebrity Problem
-4. Classical Matrix Multiplication
-5. Strassen Matrix Multiplication (the app displays both results for comparison)
-0. Return to main menu
+## Documentation
 
-See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md), [Phase 2 searching and sorting workflow](docs/PHASE2_SEARCH_SORT.md), and [Phase 3 divide-and-conquer workflow](docs/PHASE3_DIVIDE_CONQUER.md).
-
-## Planned next phases
-
-Backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
-
-
-## Phase 6: Backtracking and Branch-and-Bound
-
-Choose option **11** in the main menu for N-Queens, Subset Sum, 0/1 Knapsack backtracking, and Knapsack Branch-and-Bound using LIFO, FIFO, or least-cost/best-bound node selection. See [Phase 6 documentation](docs/PHASE6_BACKTRACKING.md).
-
-
-## Phase 7: Flow and Matching Algorithms
-
-Choose option **12** for Ford-Fulkerson maximum flow (BFS augmenting paths / Edmonds-Karp) and maximum bipartite matching. See [Phase 7 documentation](docs/PHASE7_FLOW_MATCHING.md).
-
-
-## Phase 8: String Matching and CRT
-
-Choose option **13** from the main menu. This phase provides Naive, Rabin-Karp, finite-automaton, and KMP string matching, plus the Chinese Remainder Theorem for systems with pairwise-coprime moduli. See [Phase 8 workflow and complexity](docs/PHASE8_STRING_MATCHING_CRT.md).
-
-The common `make test` command now also runs the Phase 8 test suite.
-
-
-## Phase 9: Complexity Theory and Benchmarking
-
-Choose main menu option **14** to review P, NP, NP-complete, and NP-hard; demonstrate the Independent Set to Vertex Cover polynomial-time reduction; and benchmark Naive vs KMP string matching. The benchmark prints comparison counts and CPU time and writes a CSV report to `data/phase9_benchmark.csv`. See [Phase 9 documentation](docs/PHASE9_COMPLEXITY_BENCHMARKS.md).
+- [Library management workflow](docs/LIBRARY_WORKFLOW.md)
+- [Searching and sorting](docs/SEARCHING_AND_SORTING.md)
+- [Divide and conquer](docs/DIVIDE_AND_CONQUER.md)
+- [Greedy algorithms](docs/GREEDY_ALGORITHMS.md)
+- [Dynamic programming](docs/DYNAMIC_PROGRAMMING.md)
+- [Backtracking and branch-and-bound](docs/BACKTRACKING_AND_BRANCH_BOUND.md)
+- [Flow and matching](docs/FLOW_AND_MATCHING.md)
+- [String matching and CRT](docs/STRING_MATCHING_AND_CRT.md)
+- [Complexity theory and benchmarking](docs/COMPLEXITY_AND_BENCHMARKING.md)
