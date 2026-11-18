@@ -1,6 +1,6 @@
-# Phase 5: Dynamic Programming
+# Dynamic programming: Dynamic Programming
 
-This phase adds a DP submenu and algorithms that solve overlapping subproblems and reuse table results.
+This module adds a DP submenu and algorithms that solve overlapping subproblems and reuse table results.
 
 - **0/1 Knapsack:** weights, values, capacity; each item can be selected once. O(nW).
 - **Matrix Chain Multiplication:** dimensions, optimize scalar multiplication order. O(n³).
@@ -12,4 +12,4 @@ This phase adds a DP submenu and algorithms that solve overlapping subproblems a
 
 Graph vertices are zero-based. Bellman-Ford edge input is (from,to,weight). TSP matrix uses zero for absent edges and positive weights for edges. The TSP solver is exact but exponential, so its input is deliberately bounded.
 
-Build/run: `make`, `make test`, `./digital_library`. Choose main menu option 10 for Phase 5.
+Build/run: `make`, `make test`, `./digital_library`. Choose main menu option 10 for Dynamic programming.

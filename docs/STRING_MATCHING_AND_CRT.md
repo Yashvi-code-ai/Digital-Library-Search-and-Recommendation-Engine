@@ -1,8 +1,8 @@
-# Phase 8: String Matching and Chinese Remainder Theorem
+# String matching: String Matching and Chinese Remainder Theorem
 
 ## String matching workflow
 
-Choose Phase 8, select one of the four methods, enter the text, then enter the pattern. The program reports the first match using a zero-based index, or reports that no match exists. An empty pattern matches at index 0.
+Choose String matching, select one of the four methods, enter the text, then enter the pattern. The program reports the first match using a zero-based index, or reports that no match exists. An empty pattern matches at index 0.
 
 | Algorithm | Main idea | Time complexity | Extra space |
 |---|---|---:|---:|
@@ -31,7 +31,7 @@ The CRT implementation uses modular inverses from the Extended Euclidean Algorit
 - include/string_number_theory.h — function declarations.
 - src/string_number_theory.c — four matching methods and CRT.
 - tests/test_string_number_theory.c — standard, missing, empty-pattern, negative-remainder, non-coprime, and overflow tests.
-- docs/PHASE8_STRING_MATCHING_CRT.md — workflow and complexity.
+- docs/STRING_MATCHING_AND_CRT.md — workflow and complexity.
 
 ## Build and test
 

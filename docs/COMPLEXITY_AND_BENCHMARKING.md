@@ -1,8 +1,8 @@
-# Phase 9: Complexity Theory and Benchmarking
+# Complexity and benchmarking: Complexity Theory and Benchmarking
 
 ## 1. Complexity classes
 
-This phase introduces the main complexity classes for decision problems:
+This module introduces the main complexity classes for decision problems:
 
 - **P:** problems that can be solved in polynomial time by a deterministic algorithm.
 - **NP:** problems for which a proposed YES-solution can be verified in polynomial time.
@@ -33,12 +33,12 @@ The CLI demonstrates this transformation. Example: n=5 and k=3 maps to a Vertex 
 
 ## 3. Benchmark workflow
 
-Choose Phase 9 -> Run String Matching Benchmark. The program:
+Choose Complexity and benchmarking -> Run String Matching Benchmark. The program:
 1. Creates deterministic test strings at lengths 500, 1000, 2000, and 4000.
 2. Uses a repeated-'a' text and an almost-matching pattern ending in 'b' to create a challenging no-match case.
 3. Runs Naive and KMP matching on the same input.
 4. Counts character comparisons and measures CPU time with the C `clock()` function.
-5. Prints a comparison table and saves a CSV report to `data/phase9_benchmark.csv`.
+5. Prints a comparison table and saves a CSV report to `data/module9_benchmark.csv`.
 
 CSV columns: algorithm, text length, pattern length, character comparisons, CPU time in milliseconds, and result. Times are machine/compiler dependent; comparison counts are generally more repeatable. Run on the same machine, compiler, and build settings when comparing results. This is an educational benchmark, not a universal performance ranking.
 
@@ -47,7 +47,7 @@ CSV columns: algorithm, text length, pattern length, character comparisons, CPU 
 - `include/analysis.h`: reduction and benchmark interfaces.
 - `src/analysis.c`: reduction mapping and benchmark runner.
 - `tests/test_analysis.c`: reduction tests.
-- `docs/PHASE9_COMPLEXITY_BENCHMARKS.md`: concepts, proof, and benchmark instructions.
+- `docs/COMPLEXITY_AND_BENCHMARKING.md`: concepts, proof, and benchmark instructions.
 
 ## 5. Run
 

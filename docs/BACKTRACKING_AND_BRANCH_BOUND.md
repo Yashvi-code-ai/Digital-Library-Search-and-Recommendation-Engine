@@ -1,6 +1,6 @@
-# Phase 6: Backtracking and Branch-and-Bound
+# Backtracking and branch-and-bound: Backtracking and Branch-and-Bound
 
-This phase adds exact search methods for combinatorial problems.
+This module adds exact search methods for combinatorial problems.
 
 ## Workflow
 
@@ -31,4 +31,4 @@ make test
 ./digital_library
 ```
 
-Choose main menu option 11 for Phase 6.
+Choose main menu option 11 for Backtracking and branch-and-bound.

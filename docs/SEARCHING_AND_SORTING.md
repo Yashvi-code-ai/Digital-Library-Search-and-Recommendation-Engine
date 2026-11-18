@@ -1,8 +1,8 @@
-# Phase 2: Searching and Sorting
+# Searching and sorting: Searching and Sorting
 
 ## Goal
 
-Phase 2 adds the core searching and sorting algorithms to the Phase 1 library. The algorithms operate directly on the existing dynamic array of `Book` records and compare titles without case sensitivity.
+Searching and sorting adds the core searching and sorting algorithms to the Library management library. The algorithms operate directly on the existing dynamic array of `Book` records and compare titles without case sensitivity.
 
 ## Algorithms implemented
 
@@ -12,7 +12,7 @@ Phase 2 adds the core searching and sorting algorithms to the Phase 1 library. T
 - **Iterative Binary Search:** repeatedly halves the search range using a loop. The array must already be sorted by title.
 - **Recursive Binary Search:** performs the same range-halving process through recursive function calls. The array must already be sorted by title.
 
-All three Phase 2 search functions look for an exact complete title, ignoring uppercase/lowercase differences. The Phase 1 menu's contains-text title search remains available separately.
+All three Searching and sorting search functions look for an exact complete title, ignoring uppercase/lowercase differences. The Library management menu's contains-text title search remains available separately.
 
 ### Sorting
 
@@ -23,8 +23,8 @@ Sorting moves complete `Book` structures, so IDs, authors, categories, keywords,
 
 ## Application workflow
 
-1. Start the program. Phase 1 loads the records from `data/books.csv`.
-2. Select menu option **7: Phase 2 Searching and Sorting Algorithms**.
+1. Start the program. Library management loads the records from `data/books.csv`.
+2. Select menu option **7: Searching and sorting Searching and Sorting Algorithms**.
 3. Choose Linear Search, Iterative Binary Search, or Recursive Binary Search and enter the complete title.
 4. Linear Search scans the current array directly.
 5. Before either Binary Search runs, the menu checks whether titles are sorted. If they are not, it runs Merge Sort automatically. This satisfies Binary Search's sorted-input requirement.
@@ -60,14 +60,14 @@ Run the application:
 ./digital_library
 ```
 
-Run both Phase 1 and Phase 2 tests:
+Run both Library management and Searching and sorting tests:
 
 ```bash
 make test
 ```
 
-The Phase 2 test checks case-insensitive exact title search, missing titles, merge-sort ordering, quick-sort ordering, and successful binary searches on sorted data.
+The Searching and sorting test checks case-insensitive exact title search, missing titles, merge-sort ordering, quick-sort ordering, and successful binary searches on sorted data.
 
 ## Important distinction
 
-The Phase 1 title search supports finding a piece of text inside a title. The new Phase 2 linear and binary search functions use exact complete-title matching so their search behavior can be compared fairly. Binary Search must never be applied to an unsorted array.
+The Library management title search supports finding a piece of text inside a title. The new Searching and sorting linear and binary search functions use exact complete-title matching so their search behavior can be compared fairly. Binary Search must never be applied to an unsorted array.

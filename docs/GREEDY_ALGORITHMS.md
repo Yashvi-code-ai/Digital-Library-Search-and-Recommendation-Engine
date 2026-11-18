@@ -1,6 +1,6 @@
-# Phase 4: Greedy Algorithms Workflow
+# Greedy algorithms: Greedy Algorithms Workflow
 
-Phase 4 introduces greedy algorithms. A greedy method repeatedly makes the best-looking local choice according to a rule. These choices are optimal for the specific problems below when their stated assumptions hold.
+Greedy algorithms introduces greedy algorithms. A greedy method repeatedly makes the best-looking local choice according to a rule. These choices are optimal for the specific problems below when their stated assumptions hold.
 
 ## Algorithms and user workflow
 
@@ -41,4 +41,4 @@ make test
 ./digital_library
 ```
 
-Choose **9** from the main menu to open Phase 4.
+Choose **9** from the main menu to open Greedy algorithms.

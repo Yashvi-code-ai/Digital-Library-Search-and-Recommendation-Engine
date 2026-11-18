@@ -1,6 +1,6 @@
-# Phase 7: Flow Networks and Bipartite Matching
+# Flow and matching: Flow Networks and Bipartite Matching
 
-This phase implements two graph optimization algorithms.
+This module implements two graph optimization algorithms.
 
 ## Workflow
 
@@ -23,4 +23,4 @@ This phase implements two graph optimization algorithms.
 
 ## Build and run
 
-`make`, `make test`, then `./digital_library`. Choose main menu option 12 for Phase 7.
+`make`, `make test`, then `./digital_library`. Choose main menu option 12 for Flow and matching.

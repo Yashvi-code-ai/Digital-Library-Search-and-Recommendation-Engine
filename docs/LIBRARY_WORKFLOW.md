@@ -1,7 +1,7 @@
-# Phase 1 workflow
+# Library management workflow
 
 ## Goal
-Build a small, usable library before adding advanced DAA algorithms. This phase uses C17 and a terminal menu.
+Build a small, usable library before adding advanced DAA algorithms. This module uses C17 and a terminal menu.
 
 ## Data model
 Each `Book` has an integer ID, title, author, category, keywords, citation count, and popularity score. A `Library` owns a dynamically allocated array of books. The array grows when it becomes full, so the project is not limited to a fixed number of records.
@@ -32,7 +32,7 @@ The header is `id,title,author,category,keywords,citations,popularity`. Text fie
 - Or compile manually: `gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c -o digital_library`.
 
 ## Scope boundary
-Phase 1 deliberately does not implement sorting, recommendations, trees, graphs, user accounts, or reading histories. Those will be added in later phases without mixing them into the basic CRUD layer.
+Library management deliberately does not implement sorting, recommendations, trees, graphs, user accounts, or reading histories. Those will be added in later modules without mixing them into the basic CRUD layer.
 
 ## Basic verification
 

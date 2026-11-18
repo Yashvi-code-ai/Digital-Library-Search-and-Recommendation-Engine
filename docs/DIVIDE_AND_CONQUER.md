@@ -1,6 +1,6 @@
-# Phase 3: Divide-and-Conquer Workflow
+# Divide-and-conquer: Divide-and-Conquer Workflow
 
-Phase 3 adds a separate menu for divide-and-conquer algorithms. These algorithms solve a problem by splitting it into smaller parts, solving those parts, and combining their results.
+Divide-and-conquer adds a separate menu for divide-and-conquer algorithms. These algorithms solve a problem by splitting it into smaller parts, solving those parts, and combining their results.
 
 ## Features and workflow
 
@@ -36,4 +36,4 @@ make test
 ./digital_library
 ```
 
-Choose **8** from the main menu to open Phase 3.
+Choose **8** from the main menu to open Divide-and-conquer.
