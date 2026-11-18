@@ -457,7 +457,8 @@ int main(void) {
             case 6: puts(library_save_csv(&library, DATA_FILE) ? "Library saved." : "Save failed."); break;
             case 7: search_sort_menu(&library); break;
             case 8: divide_conquer_menu(); break;
-            case 9: greedy_menu(); break;\n            case 10: dynamic_programming_menu(); break;
+            case 9: greedy_menu(); break;
+            case 10: dynamic_programming_menu(); break;
             case 11: backtracking_menu(); break;
             default: puts("Unknown option. Try again.");
         }
