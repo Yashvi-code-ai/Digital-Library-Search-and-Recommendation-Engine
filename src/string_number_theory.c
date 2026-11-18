@@ -33,38 +33,38 @@ size_t string_match_rabin_karp(const char *text, const char *pattern) {
 }
 
 size_t string_match_automaton(const char *text, const char *pattern) {
-    if(!text||!pattern)return SIZE_MAX;
-    size_t n=strlen(text),m=strlen(pattern);
-    if(!m)return 0;
-    if(m>n||m>SIZE_MAX/(256*sizeof(size_t))-1)return SIZE_MAX;
-    size_t *table=malloc((m+1)*256*sizeof(size_t));
-    if(!table)return SIZE_MAX;
-    for(size_t state=0;state<=m;state++)for(size_t ch=0;ch<256;ch++){
-        size_t next=0;
-        if(state<m&&(unsigned char)pattern[state]==ch)next=state+1;
-        else {
-            size_t limit=state<m?state:m;
-            while(limit>0){
-                if((unsigned char)pattern[limit-1]==ch)break;
-                limit--;
-            }
-            if(limit>0){
-                size_t prefix=limit-1;
-                while(prefix>0&&memcmp(pattern,pattern+state-limit+1,prefix)!=0)prefix--;
-                /* The transition is the longest pattern prefix that is a suffix after appending ch. */
-                size_t candidate=state<m?state:m;
-                while(candidate>0){
-                    if((unsigned char)pattern[candidate-1]==ch &&
-                       memcmp(pattern, pattern+state-candidate+1, candidate-1)==0)break;
-                    candidate--;
-                }
-                next=candidate;
-            }
-        }
-        table[state*256+ch]=next;
+    if (!text || !pattern) return SIZE_MAX;
+    size_t n = strlen(text), m = strlen(pattern);
+    if (m == 0) return 0;
+    if (m > n || m > SIZE_MAX / (256 * sizeof(size_t)) - 1) return SIZE_MAX;
+
+    size_t *table = malloc((m + 1) * 256 * sizeof(size_t));
+    size_t *lps = calloc(m, sizeof(size_t));
+    if (!table || !lps) { free(table); free(lps); return SIZE_MAX; }
+
+    for (size_t i = 1, len = 0; i < m; ) {
+        if (pattern[i] == pattern[len]) lps[i++] = ++len;
+        else if (len != 0) len = lps[len - 1];
+        else lps[i++] = 0;
     }
-    size_t state=0,answer=SIZE_MAX;
-    for(size_t i=0;i<n;i++){state=table[state*256+(unsigned char)text[i]];if(state==m){answer=i+1-m;break;}}
+
+    for (size_t ch = 0; ch < 256; ++ch)
+        table[ch] = (m > 0 && (unsigned char)pattern[0] == ch) ? 1 : 0;
+    for (size_t state = 1; state < m; ++state) {
+        for (size_t ch = 0; ch < 256; ++ch) {
+            if ((unsigned char)pattern[state] == ch)
+                table[state * 256 + ch] = state + 1;
+            else
+                table[state * 256 + ch] = table[lps[state - 1] * 256 + ch];
+        }
+    }
+
+    size_t state = 0, answer = SIZE_MAX;
+    for (size_t i = 0; i < n; ++i) {
+        state = table[state * 256 + (unsigned char)text[i]];
+        if (state == m) { answer = i + 1 - m; break; }
+    }
+    free(lps);
     free(table);
     return answer;
 }
