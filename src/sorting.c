@@ -66,8 +66,8 @@ static size_t partition_books(Book *books, size_t low, size_t high) {
     pivot[sizeof pivot - 1] = '\0';
 
     while (left <= right) {
-        while (compare_title_text(books[left].title, pivot) < 0) left++;
-        while (compare_title_text(books[right].title, pivot) > 0) {
+        while (left <= right && compare_title_text(books[left].title, pivot) < 0) left++;
+        while (left <= right && compare_title_text(books[right].title, pivot) > 0) {
             if (right == 0) break;
             right--;
         }
