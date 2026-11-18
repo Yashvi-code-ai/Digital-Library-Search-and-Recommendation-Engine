@@ -51,14 +51,14 @@ static size_t kmp_count(const char *text, const char *pattern,
     size_t i = 0, j = 0, answer = SIZE_MAX;
     while (i < n) {
         ++*comparisons;
-        if (text[i] == pattern[j]) { ++i; ++j; }
-        if (j == m) { answer = i - j; break; }
-        if (i < n) {
-            ++*comparisons;
-            if (text[i] != pattern[j]) {
-                if (j) j = lps[j - 1];
-                else ++i;
-            }
+        if (text[i] == pattern[j]) {
+            ++i;
+            ++j;
+            if (j == m) { answer = i - j; break; }
+        } else if (j != 0) {
+            j = lps[j - 1];
+        } else {
+            ++i;
         }
     }
     free(lps);
