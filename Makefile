@@ -8,8 +8,8 @@ TEST_GREEDY = test_greedy
 TEST_DP = test_dp
 TEST_BACKTRACKING = test_backtracking
 TEST_FLOW = test_flow_matching
-TEST_PHASE8 = test_string_number_theory
-TEST_PHASE9 = test_analysis
+TEST_STRING_MATCHING = test_string_number_theory
+TEST_ANALYSIS = test_analysis
 SOURCES = src/main.c src/book.c src/library.c src/searching.c src/sorting.c src/divide_conquer.c src/greedy.c src/dp.c src/backtracking.c src/flow_matching.c src/string_number_theory.c src/analysis.c
 
 .PHONY: all run test clean
@@ -42,13 +42,13 @@ $(TEST_BACKTRACKING): tests/test_backtracking.c src/backtracking.c include/backt
 $(TEST_FLOW): tests/test_flow_matching.c src/flow_matching.c include/flow_matching.h
 	$(CC) $(CFLAGS) tests/test_flow_matching.c src/flow_matching.c -o $(TEST_FLOW)
 
-$(TEST_PHASE8): tests/test_string_number_theory.c src/string_number_theory.c include/string_number_theory.h
-	$(CC) $(CFLAGS) tests/test_string_number_theory.c src/string_number_theory.c -o $(TEST_PHASE8)
+$(TEST_STRING_MATCHING): tests/test_string_number_theory.c src/string_number_theory.c include/string_number_theory.h
+	$(CC) $(CFLAGS) tests/test_string_number_theory.c src/string_number_theory.c -o $(TEST_STRING_MATCHING)
 
-$(TEST_PHASE9): tests/test_analysis.c src/analysis.c include/analysis.h
-	$(CC) $(CFLAGS) tests/test_analysis.c src/analysis.c -o $(TEST_PHASE9)
+$(TEST_ANALYSIS): tests/test_analysis.c src/analysis.c include/analysis.h
+	$(CC) $(CFLAGS) tests/test_analysis.c src/analysis.c -o $(TEST_ANALYSIS)
 
-test: $(TEST_LIBRARY) $(TEST_ALGORITHMS) $(TEST_DIVIDE_CONQUER) $(TEST_GREEDY) $(TEST_DP) $(TEST_BACKTRACKING) $(TEST_FLOW) $(TEST_PHASE8) $(TEST_PHASE9)
+test: $(TEST_LIBRARY) $(TEST_ALGORITHMS) $(TEST_DIVIDE_CONQUER) $(TEST_GREEDY) $(TEST_DP) $(TEST_BACKTRACKING) $(TEST_FLOW) $(TEST_STRING_MATCHING) $(TEST_ANALYSIS)
 	./$(TEST_LIBRARY)
 	./$(TEST_ALGORITHMS)
 	./$(TEST_DIVIDE_CONQUER)
@@ -56,8 +56,8 @@ test: $(TEST_LIBRARY) $(TEST_ALGORITHMS) $(TEST_DIVIDE_CONQUER) $(TEST_GREEDY) $
 	./$(TEST_DP)
 	./$(TEST_BACKTRACKING)
 	./$(TEST_FLOW)
-	./$(TEST_PHASE8)
-	./$(TEST_PHASE9)
+	./$(TEST_STRING_MATCHING)
+	./$(TEST_ANALYSIS)
 
 clean:
-	rm -f $(TARGET) $(TARGET).exe $(TEST_LIBRARY) $(TEST_LIBRARY).exe $(TEST_ALGORITHMS) $(TEST_ALGORITHMS).exe $(TEST_DIVIDE_CONQUER) $(TEST_DIVIDE_CONQUER).exe $(TEST_GREEDY) $(TEST_GREEDY).exe $(TEST_DP) $(TEST_DP).exe $(TEST_BACKTRACKING) $(TEST_BACKTRACKING).exe $(TEST_FLOW) $(TEST_FLOW).exe $(TEST_PHASE8) $(TEST_PHASE8).exe $(TEST_PHASE9) $(TEST_PHASE9).exe tests/test_books_tmp.csv
+	rm -f $(TARGET) $(TARGET).exe $(TEST_LIBRARY) $(TEST_LIBRARY).exe $(TEST_ALGORITHMS) $(TEST_ALGORITHMS).exe $(TEST_DIVIDE_CONQUER) $(TEST_DIVIDE_CONQUER).exe $(TEST_GREEDY) $(TEST_GREEDY).exe $(TEST_DP) $(TEST_DP).exe $(TEST_BACKTRACKING) $(TEST_BACKTRACKING).exe $(TEST_FLOW) $(TEST_FLOW).exe $(TEST_STRING_MATCHING) $(TEST_STRING_MATCHING).exe $(TEST_ANALYSIS) $(TEST_ANALYSIS).exe tests/test_books_tmp.csv
