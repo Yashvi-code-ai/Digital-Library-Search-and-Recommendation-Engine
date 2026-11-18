@@ -7,6 +7,7 @@
 #include "backtracking.h"
 #include "flow_matching.h"
 #include "string_number_theory.h"
+#include "analysis.h"
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -495,6 +496,48 @@ static void phase8_menu(void) {
     }
 }
 
+static void phase9_menu(void) {
+    int choice;
+    for (;;) {
+        puts("\n========== PHASE 9: COMPLEXITY AND BENCHMARKING ==========");
+        puts("1. Complexity Classes (P, NP, NP-Complete, NP-Hard)");
+        puts("2. Independent Set to Vertex Cover Reduction");
+        puts("3. Run String Matching Benchmark");
+        puts("0. Return to main menu");
+        if (!read_int("Choose an option: ", &choice)) { puts("Enter a valid number."); continue; }
+        if (choice == 0) return;
+        if (choice == 1) {
+            puts("\nP: Decision problems solvable in polynomial time.");
+            puts("NP: YES-solutions can be verified in polynomial time.");
+            puts("NP-Complete: Problems in NP that are also NP-hard.");
+            puts("NP-Hard: At least as hard as every problem in NP; not necessarily in NP.");
+            puts("\nRelationship: P is contained in NP. Whether P equals NP is unknown.");
+            puts("Examples: decision 0/1 Knapsack and decision TSP are NP-complete.");
+            puts("TSP optimization is NP-hard.");
+        } else if (choice == 2) {
+            int vertices, independent_k;
+            if (!read_int("Number of graph vertices: ", &vertices) || vertices < 0 ||
+                !read_int("Required independent-set size k: ", &independent_k) ||
+                independent_k < 0 || independent_k > vertices) {
+                puts("Enter valid non-negative values with k no greater than the vertex count.");
+                continue;
+            }
+            size_t cover_k;
+            if (analysis_reduce_independent_set_to_vertex_cover((size_t)vertices,
+                                                                 (size_t)independent_k,
+                                                                 &cover_k)) {
+                printf("Independent Set instance (G, %d) maps to Vertex Cover (G, %zu).\n",
+                       independent_k, cover_k);
+                puts("The graph is unchanged. A set is independent exactly when its complement is a vertex cover.");
+                puts("Therefore, G has an independent set of size >= k iff it has a vertex cover of size <= |V|-k.");
+            } else puts("Could not transform this input.");
+        } else if (choice == 3) {
+            if (!analysis_run_benchmark("data/phase9_benchmark.csv"))
+                puts("Benchmark failed. Check that the data folder is writable.");
+        } else puts("Unknown option. Try again.");
+    }
+}
+
 int main(void) {
     Library library;
     int choice;
@@ -503,7 +546,7 @@ int main(void) {
         puts("Note: starting with an empty library (CSV could not be loaded).");
 
     for (;;) {
-        puts("\n========== DIGITAL LIBRARY: PHASES 1-8 ==========");
+        puts("\n========== DIGITAL LIBRARY: PHASES 1-9 ==========");
         puts("1. Add a book");
         puts("2. List all books");
         puts("3. Search books by title (contains text)");
@@ -517,6 +560,7 @@ int main(void) {
         puts("11. Phase 6: Backtracking and Branch-and-Bound");
         puts("12. Phase 7: Flow and Matching Algorithms");
         puts("13. Phase 8: String Matching and CRT");
+        puts("14. Phase 9: Complexity and Benchmarking");
         puts("0. Save and exit");
         if (!read_int("Choose an option: ", &choice)) {
             puts("Please enter a valid number."); continue;
@@ -545,6 +589,7 @@ int main(void) {
             case 11: backtracking_menu(); break;
             case 12: flow_matching_menu(); break;
             case 13: phase8_menu(); break;
+            case 14: phase9_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
