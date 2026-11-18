@@ -31,7 +31,7 @@ The CRT implementation uses modular inverses from the Extended Euclidean Algorit
 - include/string_number_theory.h — function declarations.
 - src/string_number_theory.c — four matching methods and CRT.
 - tests/test_string_number_theory.c — standard, missing, empty-pattern, negative-remainder, non-coprime, and overflow tests.
-- docs/PHASE8_STRING_MATCHING_CRT.md — workflow and complexity.
+- docs/STRING_MATCHING_AND_CRT.md — workflow and complexity.
 
 ## Build and test
 
