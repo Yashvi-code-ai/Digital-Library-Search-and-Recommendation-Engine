@@ -40,7 +40,7 @@ A beginner-friendly **C17 command-line digital library** built incrementally for
 - Fractional Knapsack using value-to-weight ratios.
 - Separate Phase 4 menu, documentation, and unit tests.
 
-## Repository layout
+### Phase 5: Dynamic Programming\n\n- 0/1 Knapsack, Matrix Chain Multiplication, LCS, and Optimal BST.\n- Bellman-Ford and Floyd-Warshall shortest-path algorithms.\n- Exact bounded Traveling Salesperson Problem using Held-Karp DP.\n- Dedicated CLI menu, tests, and documentation.\n\n## Repository layout
 
 ```text
 Digital-Library-Search-and-Recommendation-Engine/
@@ -49,7 +49,7 @@ Digital-Library-Search-and-Recommendation-Engine/
 │   ├── library.h
 │   ├── algorithms.h
 │   ├── divide_conquer.h
-│   └── greedy.h
+│   ├── greedy.h\n│   └── dp.h
 ├── src/
 │   ├── main.c
 │   ├── book.c
@@ -57,19 +57,19 @@ Digital-Library-Search-and-Recommendation-Engine/
 │   ├── searching.c
 │   ├── sorting.c
 │   ├── divide_conquer.c
-│   └── greedy.c
+│   ├── greedy.c\n│   └── dp.c
 ├── data/
 │   └── books.csv
 ├── tests/
 │   ├── test_library.c
 │   ├── test_search_sort.c
 │   ├── test_divide_conquer.c
-│   └── test_greedy.c
+│   ├── test_greedy.c\n│   └── test_dp.c
 ├── docs/
 │   ├── PHASE1_WORKFLOW.md
 │   ├── PHASE2_SEARCH_SORT.md
 │   ├── PHASE3_DIVIDE_CONQUER.md
-│   └── PHASE4_GREEDY.md
+│   ├── PHASE4_GREEDY.md\n│   └── PHASE5_DP.md
 └── Makefile
 ```
 
@@ -97,7 +97,7 @@ make test
 
 The app reads and writes `data/books.csv`. Run it from the repository root so this relative path resolves correctly.
 
-## Phase 4 menu
+## Phase 5 menu\n\nChoose option **10** to access the Dynamic Programming algorithms. Read [Phase 5 documentation](docs/PHASE5_DP.md).\n\n## Phase 4 menu
 
 Choose option **9** from the main menu to access Activity Selection, Interval Partitioning, Huffman Coding, Dijkstra, Prim, Kruskal, and Fractional Knapsack. See [Phase 4 greedy workflow](docs/PHASE4_GREEDY.md).
 
@@ -116,4 +116,4 @@ See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md), [Phase 2 searching and sorting 
 
 ## Planned next phases
 
-Dynamic programming, backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
+Backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
