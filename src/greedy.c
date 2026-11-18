@@ -114,7 +114,7 @@ static size_t dsu_find(size_t *p,size_t x){while(p[x]!=x){p[x]=p[p[x]];x=p[x];}r
 int greedy_kruskal(const WeightedEdge *edges,size_t ec,size_t vertices,
                    WeightedEdge *tree,size_t *tree_count,long long *total){
     if(!edges||!tree||!tree_count||!total||!vertices)return 0;
-    WeightedEdge *copy=(WeightedEdge *)malloc(ec*sizeof(*copy));
+    WeightedEdge *copy=(WeightedEdge *)malloc((ec ? ec : 1)*sizeof(*copy));
     size_t *p=(size_t *)malloc(vertices*sizeof(*p));
     unsigned char *rank=(unsigned char *)calloc(vertices,1);
     if((ec&&!copy)||!p||!rank){free(copy);free(p);free(rank);return 0;}
