@@ -33,3 +33,7 @@ The header is `id,title,author,category,keywords,citations,popularity`. Text fie
 
 ## Scope boundary
 Phase 1 deliberately does not implement sorting, recommendations, trees, graphs, user accounts, or reading histories. Those will be added in later phases without mixing them into the basic CRUD layer.
+
+## Basic verification
+
+Run `make test` to compile and execute the small unit test program. It checks insertion, duplicate-ID rejection, ID lookup, update, CSV save/load (including a comma in a title), and deletion. The test removes its temporary CSV file afterwards.
