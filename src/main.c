@@ -6,6 +6,7 @@
 #include "dp.h"
 #include "backtracking.h"
 #include "flow_matching.h"
+#include "string_number_theory.h"
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -447,6 +448,53 @@ static void flow_matching_menu(void) {
  }
 }
 
+static void phase8_menu(void) {
+    int choice;
+    for (;;) {
+        puts("\n========== PHASE 8: STRING MATCHING AND CRT ==========");
+        puts("1. Naive String Matching");
+        puts("2. Rabin-Karp String Matching");
+        puts("3. Finite Automaton String Matching");
+        puts("4. Knuth-Morris-Pratt (KMP)");
+        puts("5. Chinese Remainder Theorem");
+        puts("0. Return to main menu");
+        if (!read_int("Choose an option: ", &choice)) { puts("Enter a valid number."); continue; }
+        if (choice == 0) return;
+        if (choice >= 1 && choice <= 4) {
+            char text[2048], pattern[512];
+            read_line("Enter text: ", text, sizeof text);
+            read_line("Enter pattern: ", pattern, sizeof pattern);
+            size_t position;
+            if (choice == 1) position = string_match_naive(text, pattern);
+            else if (choice == 2) position = string_match_rabin_karp(text, pattern);
+            else if (choice == 3) position = string_match_automaton(text, pattern);
+            else position = string_match_kmp(text, pattern);
+            if (position == SIZE_MAX) puts("Pattern not found.");
+            else printf("Pattern found at zero-based index %zu.\n", position);
+        } else if (choice == 5) {
+            int count;
+            if (!read_int("Number of congruences (1-20): ", &count) || count < 1 || count > 20) {
+                puts("Enter a count from 1 to 20."); continue;
+            }
+            long long residues[20], moduli[20], answer;
+            for (int i = 0; i < count; ++i) {
+                int r, mod;
+                char prompt[64];
+                snprintf(prompt, sizeof prompt, "Equation %d remainder: ", i + 1);
+                if (!read_int(prompt, &r)) { puts("Invalid remainder."); break; }
+                snprintf(prompt, sizeof prompt, "Equation %d positive modulus: ", i + 1);
+                if (!read_int(prompt, &mod) || mod <= 0) { puts("Modulus must be positive."); break; }
+                residues[i] = r; moduli[i] = mod;
+                if (i == count - 1) {
+                    if (crt_solve(residues, moduli, (size_t)count, &answer))
+                        printf("Least non-negative solution: x = %lld\n", answer);
+                    else puts("Could not solve: moduli must be pairwise coprime and the result must fit in long long.");
+                }
+            }
+        } else puts("Unknown option. Try again.");
+    }
+}
+
 int main(void) {
     Library library;
     int choice;
@@ -464,9 +512,11 @@ int main(void) {
         puts("6. Save library");
         puts("7. Phase 2: Searching and Sorting Algorithms");
         puts("8. Phase 3: Divide-and-Conquer Algorithms");
-        puts("9. Phase 4: Greedy Algorithms");\n        puts("10. Phase 5: Dynamic Programming");
+        puts("9. Phase 4: Greedy Algorithms");
+        puts("10. Phase 5: Dynamic Programming");
         puts("11. Phase 6: Backtracking and Branch-and-Bound");
         puts("12. Phase 7: Flow and Matching Algorithms");
+        puts("13. Phase 8: String Matching and CRT");
         puts("0. Save and exit");
         if (!read_int("Choose an option: ", &choice)) {
             puts("Please enter a valid number."); continue;
@@ -494,6 +544,7 @@ int main(void) {
             case 10: dynamic_programming_menu(); break;
             case 11: backtracking_menu(); break;
             case 12: flow_matching_menu(); break;
+            case 13: phase8_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
