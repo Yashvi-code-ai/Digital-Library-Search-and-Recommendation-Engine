@@ -134,3 +134,8 @@ Choose option **12** for Ford-Fulkerson maximum flow (BFS augmenting paths / Edm
 Choose option **13** from the main menu. This phase provides Naive, Rabin-Karp, finite-automaton, and KMP string matching, plus the Chinese Remainder Theorem for systems with pairwise-coprime moduli. See [Phase 8 workflow and complexity](docs/PHASE8_STRING_MATCHING_CRT.md).
 
 The common `make test` command now also runs the Phase 8 test suite.
+
+
+## Phase 9: Complexity Theory and Benchmarking
+
+Choose main menu option **14** to review P, NP, NP-complete, and NP-hard; demonstrate the Independent Set to Vertex Cover polynomial-time reduction; and benchmark Naive vs KMP string matching. The benchmark prints comparison counts and CPU time and writes a CSV report to `data/phase9_benchmark.csv`. See [Phase 9 documentation](docs/PHASE9_COMPLEXITY_BENCHMARKS.md).
