@@ -5,6 +5,7 @@
 #include "greedy.h"
 #include "dp.h"
 #include "backtracking.h"
+#include "flow_matching.h"
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -415,6 +416,37 @@ static void backtracking_menu(void) {
  }
 }
 \n
+
+static void flow_matching_menu(void) {
+ int choice;
+ for (;;) {
+  puts("\n========== PHASE 7: FLOW AND MATCHING ==========");
+  puts("1. Ford-Fulkerson Maximum Flow");
+  puts("2. Maximum Bipartite Matching");
+  puts("0. Return");
+  if (!read_int("Choose: ", &choice)) continue;
+  if (choice == 0) return;
+  if (choice == 1) {
+   int n,src,sink,cap[10000]; long long value;
+   if (!read_int("Vertices (2-100): ",&n)||n<2||n>100) continue;
+   puts("Enter directed capacity matrix row-wise (nonnegative; diagonal zero).");
+   for(int i=0;i<n*n;i++) if(!read_int("Capacity: ",&cap[i])) return;
+   if(!read_int("Source (zero-based): ",&src)||!read_int("Sink (zero-based): ",&sink)) continue;
+   if(flow_ford_fulkerson(cap,(size_t)n,(size_t)src,(size_t)sink,&value)) printf("Maximum flow: %lld\n",value);
+   else puts("Invalid graph or allocation failure.");
+  } else if (choice == 2) {
+   int left,right,a[10000],lm[100],rm[100]; size_t count;
+   if(!read_int("Left vertices (1-100): ",&left)||left<1||left>100||!read_int("Right vertices (1-100): ",&right)||right<1||right>100) continue;
+   puts("Enter 0/1 adjacency matrix (left rows, right columns).");
+   for(int i=0;i<left*right;i++) if(!read_int("Connection (0 or 1): ",&a[i])) return;
+   if(flow_bipartite_matching(a,(size_t)left,(size_t)right,lm,rm,&count)) {
+    printf("Maximum matching size: %zu\n",count);
+    for(int i=0;i<left;i++) if(lm[i]>=0) printf("Left %d -> Right %d\n",i,lm[i]);
+   } else puts("Invalid matrix or allocation failure.");
+  } else puts("Unknown option.");
+ }
+}
+
 int main(void) {
     Library library;
     int choice;
@@ -434,6 +466,7 @@ int main(void) {
         puts("8. Phase 3: Divide-and-Conquer Algorithms");
         puts("9. Phase 4: Greedy Algorithms");\n        puts("10. Phase 5: Dynamic Programming");
         puts("11. Phase 6: Backtracking and Branch-and-Bound");
+        puts("12. Phase 7: Flow and Matching Algorithms");
         puts("0. Save and exit");
         if (!read_int("Choose an option: ", &choice)) {
             puts("Please enter a valid number."); continue;
@@ -460,6 +493,7 @@ int main(void) {
             case 9: greedy_menu(); break;
             case 10: dynamic_programming_menu(); break;
             case 11: backtracking_menu(); break;
+            case 12: flow_matching_menu(); break;
             default: puts("Unknown option. Try again.");
         }
     }
