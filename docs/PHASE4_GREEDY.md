@@ -16,7 +16,7 @@ Phase 4 introduces greedy algorithms. A greedy method repeatedly makes the best-
 
 | Algorithm | Time complexity |
 |---|---:|
-| Activity Selection | O(n log n) |
+| Activity Selection (insertion sort) | O(n²) |
 | Interval Partitioning (this implementation) | O(n²) |
 | Huffman Coding (simple minimum scan) | O(n²) |
 | Dijkstra (adjacency matrix) | O(V²) |
