@@ -31,6 +31,15 @@ A beginner-friendly **C17 command-line digital library** built incrementally for
 - Strassen square matrix multiplication; pads non-power-of-two dimensions internally.
 - A separate Phase 3 menu and dedicated unit tests.
 
+### Phase 4: Greedy algorithms
+
+- Activity Selection and Interval Partitioning for scheduling.
+- Huffman Coding for prefix-free compression codes.
+- Dijkstra shortest paths for non-negative weighted graphs.
+- Prim and Kruskal minimum spanning trees.
+- Fractional Knapsack using value-to-weight ratios.
+- Separate Phase 4 menu, documentation, and unit tests.
+
 ## Repository layout
 
 ```text
@@ -39,24 +48,28 @@ Digital-Library-Search-and-Recommendation-Engine/
 │   ├── book.h
 │   ├── library.h
 │   ├── algorithms.h
-│   └── divide_conquer.h
+│   ├── divide_conquer.h
+│   └── greedy.h
 ├── src/
 │   ├── main.c
 │   ├── book.c
 │   ├── library.c
 │   ├── searching.c
 │   ├── sorting.c
-│   └── divide_conquer.c
+│   ├── divide_conquer.c
+│   └── greedy.c
 ├── data/
 │   └── books.csv
 ├── tests/
 │   ├── test_library.c
 │   ├── test_search_sort.c
-│   └── test_divide_conquer.c
+│   ├── test_divide_conquer.c
+│   └── test_greedy.c
 ├── docs/
 │   ├── PHASE1_WORKFLOW.md
 │   ├── PHASE2_SEARCH_SORT.md
-│   └── PHASE3_DIVIDE_CONQUER.md
+│   ├── PHASE3_DIVIDE_CONQUER.md
+│   └── PHASE4_GREEDY.md
 └── Makefile
 ```
 
@@ -84,6 +97,10 @@ make test
 
 The app reads and writes `data/books.csv`. Run it from the repository root so this relative path resolves correctly.
 
+## Phase 4 menu
+
+Choose option **9** from the main menu to access Activity Selection, Interval Partitioning, Huffman Coding, Dijkstra, Prim, Kruskal, and Fractional Knapsack. See [Phase 4 greedy workflow](docs/PHASE4_GREEDY.md).
+
 ## Phase 3 menu
 
 Choose option **8** from the main menu:
@@ -99,4 +116,4 @@ See [Phase 1 workflow](docs/PHASE1_WORKFLOW.md), [Phase 2 searching and sorting 
 
 ## Planned next phases
 
-Greedy methods, dynamic programming, backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
+Dynamic programming, backtracking and branch-and-bound, graph/flow algorithms, string matching, CRT, expanded benchmarks, and complexity analysis will be added in separate modules.
