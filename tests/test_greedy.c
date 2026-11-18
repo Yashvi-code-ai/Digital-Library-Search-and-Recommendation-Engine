@@ -32,8 +32,9 @@ static void test_huffman_and_knapsack(void){
     assert(greedy_huffman(symbols,6,codes));
     for(int i=0;i<6;i++)for(int j=i+1;j<6;j++){
         size_t li=strlen(codes[i]),lj=strlen(codes[j]);
-        assert(strncmp(codes[i],codes[j],li<lj?li:lj)!=0 ||
-               (li==lj));
+        if (li < lj) assert(strncmp(codes[i],codes[j],li)!=0);
+        else if (lj < li) assert(strncmp(codes[i],codes[j],lj)!=0);
+        else assert(strcmp(codes[i],codes[j])!=0);
     }
     const KnapsackItem items[]={{10,60},{20,100},{30,120}};
     double fractions[3],value;
