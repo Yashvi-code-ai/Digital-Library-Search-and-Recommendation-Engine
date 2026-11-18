@@ -4,6 +4,7 @@
 #include "divide_conquer.h"
 #include "greedy.h"
 #include <stdio.h>
+#include <limits.h>
 #include <stdlib.h>
 
 #define DATA_FILE "data/books.csv"
