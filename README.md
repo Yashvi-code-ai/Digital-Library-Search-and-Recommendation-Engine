@@ -13,15 +13,20 @@ A beginner-friendly C17 command-line project that combines a working digital lib
 
 The project keeps **10 algorithms** that demonstrate the main DAA techniques without making the application unnecessarily difficult to understand.
 
-| DAA topic | Algorithms |
-|---|---|
-| Searching | Linear Search, Binary Search |
-| Sorting | Merge Sort |
-| Divide and Conquer | Maximum Subarray |
-| Greedy | Activity Selection, Dijkstra's Shortest Path |
-| Dynamic Programming | 0/1 Knapsack |
-| Backtracking | N-Queens, Subset Sum |
-| String Matching | Knuth-Morris-Pratt (KMP) |
+| DAA topic | Algorithm | What it does | Time complexity |
+|---|---|---|---|
+| Searching | Linear Search | Checks titles one by one. | O(n) |
+| Searching | Binary Search | Repeatedly halves a sorted list. | O(log n) |
+| Sorting | Merge Sort | Divides the list, sorts both halves and merges them. | O(n log n) |
+| Divide and Conquer | Maximum Subarray | Finds the contiguous section with the largest sum. | O(n log n) |
+| Greedy | Activity Selection | Chooses the maximum number of non-overlapping activities. | O(n²) in this implementation |
+| Greedy | Dijkstra | Finds shortest paths from one source in a non-negative weighted graph. | O(V²) |
+| Dynamic Programming | 0/1 Knapsack | Finds the highest value that fits in a bag. | O(nW) |
+| Backtracking | N-Queens | Counts ways to place queens without attacking each other. | Exponential |
+| Backtracking | Subset Sum | Checks whether some values add up to a target. | O(2ⁿ) |
+| String Matching | Knuth-Morris-Pratt (KMP) | Finds a pattern in a larger text. | O(n + m) |
+
+Here, `n` is the number of items or text length, `V` is the number of graph vertices, `W` is the knapsack capacity, and `m` is the pattern length.
 
 ## What was left out and why
 
