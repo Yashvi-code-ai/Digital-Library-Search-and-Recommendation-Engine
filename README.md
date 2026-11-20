@@ -44,7 +44,7 @@ Windows PowerShell:
 
 ```powershell
 gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c src/searching.c src/sorting.c src/divide_conquer.c src/greedy.c src/dp.c src/backtracking.c src/flow_matching.c src/string_number_theory.c src/analysis.c -o digital_library.exe
-.\\digital_library.exe
+.\digital_library.exe
 ```
 
 Run the program from the repository root so it can find `data/books.csv`.
