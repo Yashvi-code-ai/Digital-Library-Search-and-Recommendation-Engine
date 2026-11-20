@@ -1,47 +1,45 @@
 # Digital Library Search and Recommendation Engine
 
-A beginner-friendly C17 command-line project that combines a working digital library with selected Design and Analysis of Algorithms (DAA) implementations.
+A beginner-friendly C17 command-line digital library project with five selected Design and Analysis of Algorithms (DAA) demonstrations.
 
 ## Library features
 
-- Add, view, search, update and delete book records.
+- Add, list, search, update and delete book records.
 - Store books in a dynamically growing array.
-- Load and save the library using a CSV file.
-- Search book titles and sort the library alphabetically.
+- Load and save records using `data/books.csv`.
+- Search within titles and sort the library alphabetically.
 
-## Algorithms retained
+## Five DAA algorithms
 
-The project keeps **10 algorithms** that demonstrate the main DAA techniques without making the application unnecessarily difficult to understand.
-
-| DAA topic | Algorithm | What it does | Time complexity |
+| DAA area | Algorithm | What it does | Time complexity |
 |---|---|---|---|
-| Searching | Linear Search | Checks titles one by one. | O(n) |
-| Searching | Binary Search | Repeatedly halves a sorted list. | O(log n) |
-| Sorting | Merge Sort | Divides the list, sorts both halves and merges them. | O(n log n) |
-| Divide and Conquer | Maximum Subarray | Finds the contiguous section with the largest sum. | O(n log n) |
-| Greedy | Activity Selection | Chooses the maximum number of non-overlapping activities. | O(n²) in this implementation |
-| Greedy | Dijkstra | Finds shortest paths from one source in a non-negative weighted graph. | O(V²) |
-| Dynamic Programming | 0/1 Knapsack | Finds the highest value that fits in a bag. | O(nW) |
-| Backtracking | N-Queens | Counts ways to place queens without attacking each other. | Exponential |
-| Backtracking | Subset Sum | Checks whether some values add up to a target. | O(2ⁿ) |
-| String Matching | Knuth-Morris-Pratt (KMP) | Finds a pattern in a larger text. | O(n + m) |
+| Searching | Linear Search | Checks book titles one by one. | O(n) |
+| Sorting / Divide and Conquer | Merge Sort | Splits the book list, sorts each half and merges them. | O(n log n) |
+| Greedy | Activity Selection | Selects the largest compatible set of activities. | O(n²) in this implementation |
+| Dynamic Programming | 0/1 Knapsack | Finds the maximum value that fits within a capacity. | O(nW) |
+| Backtracking | N-Queens | Counts valid ways to place N queens without attacks. | Exponential |
 
-Here, `n` is the number of items or text length, `V` is the number of graph vertices, `W` is the knapsack capacity, and `m` is the pattern length.
+Here, `n` is the number of books or activities and `W` is the knapsack capacity.
 
-## What was left out and why
+## Why these five?
 
-The extra implementations for maximum flow, Chinese Remainder Theorem, and the Independent Set-to-Vertex Cover reduction have been removed from the application. They are useful topics, but they add separate concepts and code that are not essential to demonstrate the main DAA techniques in this library project.
+The selected algorithms cover five useful DAA ideas while keeping the project manageable to build, demonstrate and explain:
 
-Other advanced or overlapping variants—such as multiple sorting methods, additional shortest-path and minimum-spanning-tree algorithms, extra string matchers, and larger dynamic-programming problems—are also intentionally not included.
+- Linear Search demonstrates a basic search.
+- Merge Sort demonstrates sorting and divide-and-conquer.
+- Activity Selection demonstrates a greedy choice.
+- 0/1 Knapsack demonstrates dynamic programming.
+- N-Queens demonstrates backtracking.
 
-**Important:** This is a focused selection, not a claim that the removed algorithms are unimportant. If your instructor's written requirements explicitly name any of them, they should be restored.
+Binary Search, Maximum Subarray, Dijkstra, Subset Sum and KMP were removed from the active project to reduce the number of concepts and input workflows.
 
-## How the application is organized
+## Application workflow
 
-1. The main menu handles library operations.
-2. The DAA Algorithms menu contains the algorithm demonstrations.
-3. Book records are stored in `data/books.csv`.
-4. Algorithm tests are kept separately in `tests/test_core.c`.
+1. The program starts and loads books from `data/books.csv`.
+2. The main menu provides book management, title search, sorting and saving.
+3. The DAA Algorithms menu provides the five demonstrations listed above.
+4. The program saves the library on request and automatically on exit.
+5. Dynamically allocated memory is freed before the program closes.
 
 ## Build and run
 
@@ -52,14 +50,14 @@ make
 make run
 ```
 
-Windows PowerShell:
+Windows PowerShell with MinGW GCC:
 
 ```powershell
-gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c src/searching.c src/sorting.c src/divide_conquer.c src/greedy.c src/dp.c src/backtracking.c src/string_number_theory.c -o digital_library.exe
+gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c src/searching.c src/sorting.c src/greedy.c src/dp.c src/backtracking.c -o digital_library.exe
 .\digital_library.exe
 ```
 
-Run the program from the repository root so it can find `data/books.csv`.
+Run the executable from the repository root so it can find `data/books.csv`.
 
 ## Run tests
 
@@ -67,4 +65,8 @@ Run the program from the repository root so it can find `data/books.csv`.
 make test
 ```
 
-The tests cover the retained algorithms with small example inputs.
+The test suite checks all five DAA algorithms and the separate library storage workflow.
+
+## Scope note
+
+The current application manages and searches a digital library and demonstrates five DAA algorithms. It does not yet generate personalized book recommendations from a reader's preferences or history; that can be added as a future feature.
