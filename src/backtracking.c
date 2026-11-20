@@ -1,15 +1,24 @@
 #include "backtracking.h"
 #include <stdlib.h>
-#include <limits.h>
-
-static int safe_queen(const int *q,int row,int col){for(int r=0;r<row;r++)if(q[r]==col||abs(q[r]-col)==row-r)return 0;return 1;}
-static void queens(int n,int row,int*q,long long*count){if(row==n){(*count)++;return;}for(int col=0;col<n;col++)if(safe_queen(q,row,col)){q[row]=col;queens(n,row+1,q,count);}}
-long long bt_nqueens_count(int n){if(n<1||n>14)return -1;int*q=malloc((size_t)n*sizeof(*q));if(!q)return -1;long long count=0;queens(n,0,q,&count);free(q);return count;}
-static int subset(const int*a,size_t n,size_t i,int rem){if(rem==0)return 1;if(i==n||rem<0)return 0;return subset(a,n,i+1,rem-a[i])||subset(a,n,i+1,rem);}
-int bt_subset_sum(const int*a,size_t n,int target){if((n&&!a)||target<0)return 0;for(size_t i=0;i<n;i++)if(a[i]<0)return 0;return subset(a,n,0,target);}
-static void knap_rec(const int*w,const int*v,size_t n,size_t i,int cap,long long value,long long*best){if(i==n){if(value>*best)*best=value;return;}knap_rec(w,v,n,i+1,cap,value,best);if(w[i]<=cap)knap_rec(w,v,n,i+1,cap-w[i],value+v[i],best);}
-int bt_knapsack(const int*w,const int*v,size_t n,int cap,long long*best){if(!w||!v||!best||cap<0||n>40)return 0;for(size_t i=0;i<n;i++)if(w[i]<=0||v[i]<0)return 0;*best=0;knap_rec(w,v,n,0,cap,0,best);return 1;}
-typedef struct{int level,weight;long long value;double bound;} Node;
-static double bound_node(const Node*x,const int*w,const int*v,size_t n,int cap){if(x->weight>cap)return 0;double b=(double)x->value;int room=cap-x->weight;for(size_t i=(size_t)x->level;i<n&&room>0;i++){if(w[i]<=room){room-=w[i];b+=v[i];}else{b+=(double)v[i]*room/w[i];break;}}return b;}
-static void sort_ratio(int*w,int*v,size_t n){for(size_t i=1;i<n;i++){int a=w[i],b=v[i];size_t j=i;while(j&&((double)v[j-1]/w[j-1]<(double)b/a)){w[j]=w[j-1];v[j]=v[j-1];j--;}w[j]=a;v[j]=b;}}
-int bt_knapsack_bnb(const int*weights,const int*values,size_t n,int cap,int strategy,long long*best){if(!weights||!values||!best||cap<0||n>20||strategy<0||strategy>2)return 0;int*w=malloc(n*sizeof(int)),*v=malloc(n*sizeof(int));size_t max=(size_t)1<<(n+1),count=0;if(!w||!v){free(w);free(v);return 0;}for(size_t i=0;i<n;i++){if(weights[i]<=0||values[i]<0){free(w);free(v);return 0;}w[i]=weights[i];v[i]=values[i];}sort_ratio(w,v,n);Node*q=malloc(max*sizeof(Node));if(!q){free(w);free(v);return 0;}Node root={0,0,0,0};root.bound=bound_node(&root,w,v,n,cap);q[count++]=root;*best=0;size_t head=0;while((strategy==BT_FIFO?head<count:count>0)){size_t idx;if(strategy==BT_FIFO)idx=head++;else if(strategy==BT_LIFO)idx=--count;else{idx=0;for(size_t j=1;j<count;j++)if(q[j].bound>q[idx].bound)idx=j;Node tmp=q[idx];q[idx]=q[--count];q[count]=tmp;}Node cur=(strategy==BT_LEAST_COST)?q[count]:q[idx];if(cur.bound<=*best||cur.level>=(int)n)continue;int k=cur.level;Node yes={k+1,cur.weight+w[k],cur.value+v[k],0};if(yes.weight<=cap&&yes.value>*best)*best=yes.value;yes.bound=bound_node(&yes,w,v,n,cap);if(yes.bound>*best)q[count++]=yes;Node no={k+1,cur.weight,cur.value,0};no.bound=bound_node(&no,w,v,n,cap);if(no.bound>*best)q[count++]=no;}free(q);free(w);free(v);return 1;}
+static int safe(const int *q,int row,int col){
+    for(int r=0;r<row;r++)if(q[r]==col||abs(q[r]-col)==row-r)return 0;
+    return 1;
+}
+static void queens(int n,int row,int *q,long long *count){
+    if(row==n){(*count)++;return;}
+    for(int col=0;col<n;col++)if(safe(q,row,col)){q[row]=col;queens(n,row+1,q,count);}
+}
+long long bt_nqueens_count(int n){
+    if(n<1||n>14)return -1;
+    int *q=malloc((size_t)n*sizeof(*q));if(!q)return -1;
+    long long count=0;queens(n,0,q,&count);free(q);return count;
+}
+static int subset(const int *a,size_t n,size_t i,int target){
+    if(target==0)return 1;if(i==n||target<0)return 0;
+    return subset(a,n,i+1,target-a[i])||subset(a,n,i+1,target);
+}
+int bt_subset_sum(const int *a,size_t n,int target){
+    if((n&&!a)||target<0)return 0;
+    for(size_t i=0;i<n;i++)if(a[i]<0)return 0;
+    return subset(a,n,0,target);
+}
