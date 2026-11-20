@@ -106,7 +106,7 @@ static void string_menu(void){
     if(choice==1){
         char text[500],pattern[100];read_line("Text: ",text,sizeof text);read_line("Pattern: ",pattern,sizeof pattern);
         size_t at=string_match_kmp(text,pattern);
-        if(at==SIZE_MAX)puts("Pattern not found.");else printf("Pattern found at index %zu.\n",at);
+        if(at==(size_t)-1)puts("Pattern not found.");else printf("Pattern found at index %zu.\n",at);
     }else if(choice==2){
         int n;if(!read_int("Number of equations (1-10): ",&n)||n<1||n>10)return;
         long long r[10],m[10];
