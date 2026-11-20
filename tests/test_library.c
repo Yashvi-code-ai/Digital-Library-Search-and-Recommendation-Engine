@@ -39,6 +39,6 @@ int main(void) {
     remove("tests/test_books_tmp.csv");
     library_free(&library);
     library_free(&loaded);
-    puts("All Phase 1 library tests passed.");
+    puts("All library tests passed.");
     return 0;
 }
