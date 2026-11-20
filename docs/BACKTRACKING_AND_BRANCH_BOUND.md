@@ -1,34 +1,17 @@
-# Backtracking and branch-and-bound: Backtracking and Branch-and-Bound
+# Backtracking: N-Queens
 
-This module adds exact search methods for combinatorial problems.
+The N-Queens problem asks us to place N queens on an N by N chessboard so that no two queens attack each other.
+
+A queen can attack along its row, column and diagonals. The program places one queen in each row and checks whether each position is safe.
 
 ## Workflow
 
-1. **N-Queens:** enter board size (1–14). Recursive backtracking places one queen per row, checks columns and diagonals, and counts complete valid boards.
-2. **Subset Sum:** enter nonnegative values and a target. At each position, recursion explores including or excluding the value and stops when a valid sum is found.
-3. **0/1 Knapsack Backtracking:** recursively explores exclude/include decisions and returns the best value.
-4. **Knapsack Branch-and-Bound:** sorts items by value/weight ratio, computes an optimistic fractional upper bound, and prunes nodes that cannot beat the current best solution. Choose:
-   - **LIFO:** stack-based depth-first expansion.
-   - **FIFO:** queue-based breadth-first expansion.
-   - **Least-cost / best-bound:** expands the live node with the strongest upper bound first.
+1. Enter a board size from 1 to 14.
+2. The program tries each column in the current row.
+3. If a position is safe, it places a queen and moves to the next row.
+4. If no safe position works, it goes back to the previous row and tries another column.
+5. It counts and displays all valid arrangements.
 
-## Complexity
+This is backtracking because the algorithm builds a possible solution step by step and reverses a choice when it cannot lead to a valid solution.
 
-| Algorithm | Worst-case time | Extra space |
-|---|---:|---:|
-| N-Queens | O(n!) | O(n) |
-| Subset Sum | O(2ⁿ) | O(n) recursion |
-| 0/1 Knapsack backtracking | O(2ⁿ) | O(n) recursion |
-| Knapsack branch-and-bound | O(2ⁿ) | O(2ⁿ) live nodes |
-
-Branch-and-bound can prune many nodes in practice, but its worst case remains exponential. This implementation limits N-Queens to 14 and knapsack branch-and-bound to 20 items.
-
-## Build and run
-
-```bash
-make
-make test
-./digital_library
-```
-
-Choose main menu option 11 for Backtracking and branch-and-bound.
+The search has exponential worst-case time. The implementation limits the board size to 14 to keep the demonstration manageable.
