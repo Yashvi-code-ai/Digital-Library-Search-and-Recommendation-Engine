@@ -20,6 +20,7 @@ int library_remove(Library *library, int id);
 int library_update(Library *library, int id, const Book *replacement);
 void library_list(const Library *library);
 void library_search_title(const Library *library, const char *query);
+size_t library_recommend_category(const Library *library, const char *category);
 int library_load_csv(Library *library, const char *path);
 int library_save_csv(const Library *library, const char *path);
 int library_next_id(const Library *library);
