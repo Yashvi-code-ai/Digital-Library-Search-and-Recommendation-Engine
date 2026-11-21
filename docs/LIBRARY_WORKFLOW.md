@@ -11,12 +11,17 @@ Each `Book` has an integer ID, title, author, category, keywords, citation count
 2. The menu lets the user add, list, search, update, or delete a book.
 3. Adding assigns the next available ID and rejects empty titles/authors and duplicate IDs.
 4. Title search is a case-insensitive linear scan.
-5. Save writes the current records back to the CSV file. Exit also saves automatically.
-6. The allocated array is freed before the program exits.
+5. The recommendation option asks for a preferred category and displays all books with the same category, ignoring uppercase/lowercase differences.
+6. Save writes the current records back to the CSV file. Exit also saves automatically.
+7. The allocated array is freed before the program exits.
+
+## Recommendation method
+The recommendation feature uses a simple category-matching approach. It scans the library once and displays books whose category matches the category entered by the reader. It is intentionally small and does not require accounts, ratings, or reading-history data. Its time complexity is O(n), where n is the number of stored books.
 
 ## Algorithms and complexity
 - Find ID / duplicate check: linear search, O(n) time.
 - Search title: linear scan, O(n * m) worst case for n titles and query length m.
+- Category recommendations: one scan of the books, O(n) time.
 - Add: amortized O(1) array append; O(n) when capacity growth reallocates.
 - Update: O(n) to locate the ID, then O(1) replacement.
 - Delete: O(n) to locate and shift following records.
@@ -32,8 +37,8 @@ The header is `id,title,author,category,keywords,citations,popularity`. Text fie
 - Or compile manually: `gcc -std=c17 -Wall -Wextra -Wpedantic -Iinclude src/main.c src/book.c src/library.c -o digital_library`.
 
 ## Scope boundary
-Library management includes title sorting through Merge Sort. Personalized recommendations based on reader preferences or reading history, user accounts, and reading histories are outside the current project scope and can be future improvements.
+The project provides a basic category-based recommendation feature. More advanced recommendations based on user preferences, ratings, accounts, or reading histories can be future improvements.
 
 ## Basic verification
 
-Run `make test` to compile and execute the small unit test program. It checks insertion, duplicate-ID rejection, ID lookup, update, CSV save/load (including a comma in a title), and deletion. The test removes its temporary CSV file afterwards.
+Run `make test` to compile and execute the small unit test program. It checks insertion, duplicate-ID rejection, ID lookup, update, category recommendations, CSV save/load (including a comma in a title), and deletion. The test removes its temporary CSV file afterwards.
