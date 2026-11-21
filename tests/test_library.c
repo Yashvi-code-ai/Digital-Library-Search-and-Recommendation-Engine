@@ -21,6 +21,8 @@ int main(void) {
     assert(!library_add(&library, &first)); /* duplicate ID */
     assert(library_find_id(&library, 1) == 0);
     assert(library_find_id(&library, 99) == -1);
+    assert(library_recommend_category(&library, "computer science") == 1);
+    assert(library_recommend_category(&library, "History") == 0);
 
     replacement = first;
     strcpy(replacement.title, "Updated Algorithms");
