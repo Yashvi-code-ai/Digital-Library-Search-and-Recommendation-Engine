@@ -64,6 +64,12 @@ static void search_books(Library *library) {
     else print_book(&library->items[index]);
 }
 
+static void recommend_books(Library *library) {
+    char category[CATEGORY_LEN];
+    read_line("Enter your preferred category: ", category, sizeof category);
+    library_recommend_category(library, category);
+}
+
 static void greedy_menu(void) {
     int count;
     if (!read_int("Number of activities (1-50): ", &count) || count < 1 || count > 50) return;
@@ -134,7 +140,7 @@ int main(void) {
         puts("\n===== DIGITAL LIBRARY =====");
         puts("1 Add Book  2 List Books  3 Search Titles");
         puts("4 Update Book  5 Delete Book  6 Sort Books");
-        puts("7 DAA Algorithms  8 Save Library  0 Save and Exit");
+        puts("7 DAA Algorithms  8 Save Library  9 Recommend Books  0 Save and Exit");
         if (!read_int("Choice: ", &choice)) {
             puts("Please enter a valid number.");
             continue;
@@ -163,6 +169,7 @@ int main(void) {
             case 8:
                 puts(library_save_csv(&library, DATA_FILE) ? "Library saved." : "Save failed.");
                 break;
+            case 9: recommend_books(&library); break;
             default: puts("Invalid option.");
         }
     }
