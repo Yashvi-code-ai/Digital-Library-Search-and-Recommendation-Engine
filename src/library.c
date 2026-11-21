@@ -81,6 +81,15 @@ static int contains_case_insensitive(const char *text, const char *query) {
     return 0;
 }
 
+static int same_text_case_insensitive(const char *a, const char *b) {
+    while (*a && *b) {
+        if (tolower((unsigned char)*a) != tolower((unsigned char)*b)) return 0;
+        a++;
+        b++;
+    }
+    return *a == *b;
+}
+
 void library_search_title(const Library *library, const char *query) {
     int found = 0;
     for (size_t i = 0; i < library->count; i++) {
@@ -90,6 +99,25 @@ void library_search_title(const Library *library, const char *query) {
         }
     }
     if (!found) puts("\nNo matching title found.");
+}
+
+size_t library_recommend_category(const Library *library, const char *category) {
+    if (!library || !category || !category[0]) {
+        puts("Please enter a category.");
+        return 0;
+    }
+
+    size_t found = 0;
+    printf("\nRecommended books in category: %s\n", category);
+    for (size_t i = 0; i < library->count; i++) {
+        if (same_text_case_insensitive(library->items[i].category, category)) {
+            print_book(&library->items[i]);
+            found++;
+        }
+    }
+
+    if (!found) puts("No books found in this category.");
+    return found;
 }
 
 /* CSV helpers support quoted fields and escaped double quotes. */
